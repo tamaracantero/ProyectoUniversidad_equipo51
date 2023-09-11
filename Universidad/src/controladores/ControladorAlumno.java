@@ -22,7 +22,7 @@ public class ControladorAlumno {
     static PreparedStatement ps = null;
     static ResultSet rs = null;
         
-    public static void crearAlumno(Alumno alumno){
+    public static void subirAlumno(Alumno alumno){
         con = Conexion.conectarse();
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?,?,?,?,?) ";
         try {
