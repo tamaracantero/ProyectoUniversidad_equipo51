@@ -88,6 +88,36 @@ public class ControladorAlumno {
         return idAlumno;
     }
     
-    
+    public static void actualizarAlumno(Alumno a){
+        con=Conexion.conectarse();
+        String sql="UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaDeNacimiento=?,estado=? WHERE idAlumno=?";
+        try {
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, a.getDni());
+            ps.setString(2, a.getApellido());
+            ps.setString(3, a.getNombre());
+            ps.setDate(4, Date.valueOf(a.getFechaNacimiento()));
+            ps.setInt(5, a.getEstado());
+            ps.setInt(6, a.getIdAlumno());
+            
+            int f=ps.executeUpdate();
+            
+            
+            
+            if(f>0){
+                JOptionPane.showMessageDialog(null, "Alumno Actualizado Correctamente");
+                System.out.println("Filas Afectadas: "+f);
+            }else{
+                JOptionPane.showMessageDialog(null, "El Alumno no se ha Actualizado Correctamente");
+                System.out.println("Filas Afectadas: "+f);
+                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Agregar un alumno a la Base de Datos "+ex.getMessage());
+            System.out.println("Error en en el Metodo crearAlumno, Clase ControladorAlumno.");
+        }
+
+
+    }
     
 }
