@@ -120,4 +120,23 @@ public class ControladorAlumno {
 
     }
     
+    
+      public void eliminarAlumno(int id) {
+        
+        try {
+            String sql = "UPDATE alumno SET estado  = 0 WHERE ideAlumno = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+            
+            if(fila==1) {
+            JOptionPane.showMessageDialog(null, "Se ha eliminado el alumno con exito ");
+        }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en la eliminacion del alumno, intente de nuevo ");
+        }
+    }
+    
+    
 }
