@@ -50,4 +50,44 @@ public class ControladorAlumno {
     }
     
     
+      
+    public static int obtenerIdAlumnoPorDni(int dni) {
+        con = Conexion.conectarse();
+        String sql = "SELECT idAlumno FROM alumno WHERE dni = ?";
+        int idAlumno = -1;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                idAlumno = rs.getInt("idAlumno");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el ID del alumno: " + ex.getMessage());
+            System.out.println("Error al encontrar alumno por DNI");
+        } finally {
+            
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+               
+            }
+        }
+
+        return idAlumno;
+    }
+    
+    
+    
 }
