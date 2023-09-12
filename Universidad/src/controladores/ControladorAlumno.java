@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -121,7 +123,7 @@ public class ControladorAlumno {
     }
     
     
-      public void eliminarAlumno(int id) {
+      public static void eliminarAlumno(int id) {
         
         try {
             String sql = "UPDATE alumno SET estado  = 0 WHERE idAlumno = ? ";
@@ -137,6 +139,31 @@ public class ControladorAlumno {
             JOptionPane.showMessageDialog(null, "Error en la eliminacion del alumno, intente de nuevo ");
         }
     }
+      
+    public static ArrayList listaDeAlumnosActivos(){
+            ArrayList<Alumno> listaDeAlumnosActivos = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM alumno WHERE estado = 1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+            Alumno alumno = new Alumno();    
+              alumno.setIdAlumno(    rs.getInt(1));
+              alumno.setDni(rs.getInt(2));
+              alumno.setApellido(rs.getString(3));
+              alumno.setNombre(rs.getString(4));
+              alumno.setFechaNacimiento(rs.getDate(5).toLocalDate());
+              alumno.setEstado(rs.getInt(6));
+                  
+               listaDeAlumnosActivos.add(alumno);            
+            }
+          
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al cargar la Lista de Alumnos Activos "+ex.getMessage());
+        }
+          return listaDeAlumnosActivos;
+    } 
     
     
 }
