@@ -23,6 +23,8 @@ public class ControladorAlumno {
     static Connection con= Conexion.conectarse();
     static PreparedStatement ps = null;
     static ResultSet rs = null;
+    
+    /**HECHO POR JUAN LASPIUR*/
         
     public static void subirAlumno(Alumno alumno){
         
@@ -51,7 +53,9 @@ public class ControladorAlumno {
     
     }
     
-    
+   
+    /**HECHO POR BRIAN PEREIRA*/
+     
       
     public static int obtenerIdAlumnoPorDni(int dni) {
         
@@ -90,6 +94,8 @@ public class ControladorAlumno {
         return idAlumno;
     }
     
+    /**HECHO POR TAMARA CANTERO*/
+    
     public static void actualizarAlumno(Alumno a){
         
         String sql="UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaDeNacimiento=?,estado=? WHERE idAlumno=?";
@@ -123,6 +129,8 @@ public class ControladorAlumno {
     }
     
     
+    /**HECHO POR ARIEL LAZARTE*/
+    
       public static void eliminarAlumno(int id) {
         
         try {
@@ -140,6 +148,8 @@ public class ControladorAlumno {
         }
     }
       
+    /**HECHO POR JUAN LASPIUR*/
+    
     public static ArrayList listaDeAlumnosActivos(){
             ArrayList<Alumno> listaDeAlumnosActivos = new ArrayList<>();
         try {
@@ -163,7 +173,31 @@ public class ControladorAlumno {
             JOptionPane.showMessageDialog(null,"Error al cargar la Lista de Alumnos Activos "+ex.getMessage());
         }
           return listaDeAlumnosActivos;
+          
     } 
     
+    /**HECHO POR TAMARA CANTERO*/
     
+        public static Alumno buscarAlumnoPorDni(int dni){
+        Alumno a=new Alumno();
+        String sql="SELECT * FROM alumno WHERE dni=?";
+        try {
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                a.setIdAlumno(rs.getInt(1));
+                a.setDni(rs.getInt(2));
+                a.setApellido(rs.getString(3));
+                a.setNombre(rs.getString(4));
+                a.setFechaNacimiento(rs.getDate(5).toLocalDate());
+                a.setEstado(rs.getInt(6));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Buscar alumno alumno"+ex.getMessage());
+            System.out.println("Error en en el Metodo buscarAlumnoPorDni, Clase ControladorAlumno.");
+        }
+        return a;
+    }
+
 }
