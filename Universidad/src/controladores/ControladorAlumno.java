@@ -18,12 +18,12 @@ public class ControladorAlumno {
     U
     D
     */
-    static Connection con= null;
+    static Connection con= Conexion.conectarse();
     static PreparedStatement ps = null;
     static ResultSet rs = null;
         
     public static void subirAlumno(Alumno alumno){
-        con = Conexion.conectarse();
+        
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?,?,?,?,?) ";
         try {
             
@@ -52,7 +52,7 @@ public class ControladorAlumno {
     
       
     public static int obtenerIdAlumnoPorDni(int dni) {
-        con = Conexion.conectarse();
+        
         String sql = "SELECT idAlumno FROM alumno WHERE dni = ?";
         int idAlumno = -1;
 
@@ -89,7 +89,7 @@ public class ControladorAlumno {
     }
     
     public static void actualizarAlumno(Alumno a){
-        con=Conexion.conectarse();
+        
         String sql="UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaDeNacimiento=?,estado=? WHERE idAlumno=?";
         try {
             ps=con.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class ControladorAlumno {
       public void eliminarAlumno(int id) {
         
         try {
-            String sql = "UPDATE alumno SET estado  = 0 WHERE ideAlumno = ? ";
+            String sql = "UPDATE alumno SET estado  = 0 WHERE idAlumno = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
