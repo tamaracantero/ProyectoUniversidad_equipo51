@@ -225,4 +225,41 @@ public class ControladorAlumno {
         }
     }
 
+    /**HECHO POR ARIEL LAZARTE*/
+        
+        public static Alumno obtenerAlumnoporid(int idAlumno){
+           Alumno a= new Alumno();
+           String sql="SELECT * FROM alumno WHERE id = ? ";
+           
+           try {
+               ps=con.prepareStatement(sql);
+               ps.setInt(1, idAlumno);
+               rs=ps.executeQuery();
+               
+               if(rs.next()) {
+                a.setIdAlumno(rs.getInt(1));
+                a.setDni(rs.getInt(2));
+                a.setApellido(rs.getString(3));
+                a.setNombre(rs.getString(4));
+                a.setFechaNacimiento(rs.getDate(5).toLocalDate());
+                a.setEstado(rs.getInt(6));
+                    
+                   
+               }
+           }catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, "Hubo un error al buscar alumno ");
+               System.out.println("Error en Obtener idAlumno, intente de nuevo");
+           }
+        return a;
+        }
+        
+  
+        
+        
+        
+        
+        
+        //Aguante el equipo 51 
+        //Aguante messi
 }
+
