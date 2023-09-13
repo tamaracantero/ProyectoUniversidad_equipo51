@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -110,5 +111,22 @@ public class ControladorMateria {
         }
     }
     
+      /**HECHO POR TAMARA CANTERO*/
     
+    public static ArrayList listarMateria(){
+        ArrayList<Materia> materias=new ArrayList<>();
+        String sql="SELECT * FROM materia";
+        try {
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                materias.add(new Materia(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4)));
+                JOptionPane.showMessageDialog(null, "materias listadas exitoamente");
+            
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar materias, intente de nuevo "+ex.getMessage());
+        }
+        return materias;
+    }
 }
