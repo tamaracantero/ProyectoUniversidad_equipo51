@@ -46,7 +46,7 @@ public class ControladorMateria {
     }
     /**HECHO POR ARIEL LAZARTE*/
     
-    public static void obtenerMateriaPorId(int idMateria) {
+    public static Materia obtenerMateriaPorId(int idMateria) {
         String sql = "SELECT * FROM materia WHERE id = ? ";
         Materia m = new Materia();
         try {
@@ -66,6 +66,7 @@ public class ControladorMateria {
             JOptionPane.showMessageDialog(null, "Hubo un error al buscar materia ");
                System.out.println("Error en Obtener idMateria,por favor intente de nuevo");
         }
+        return m;
     }
     
      /**HECHO POR BRIAN PEREIRA*/
