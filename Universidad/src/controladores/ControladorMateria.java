@@ -68,5 +68,23 @@ public class ControladorMateria {
         }
     }
     
+    /**HECHO POR JUAN LASPIUR*/
+      public static void eliminarMateria(int id) {
+
+        try {
+            String sql = "UPDATE materia SET estado  = 0 WHERE idMateria = ? ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int fila = ps.executeUpdate();
+
+            if (fila == 1) {
+                JOptionPane.showMessageDialog(null, "Se ha dado de baja materia con exito ");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en la baja de la materia, intente de nuevo "+ex.getMessage());
+        }
+    }
+    
     
 }
