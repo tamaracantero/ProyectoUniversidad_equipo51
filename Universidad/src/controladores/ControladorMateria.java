@@ -48,7 +48,7 @@ public class ControladorMateria {
     /**HECHO POR ARIEL LAZARTE*/
     
     public static Materia obtenerMateriaPorId(int idMateria) {
-        String sql = "SELECT * FROM materia WHERE id = ? ";
+        String sql = "SELECT * FROM materia WHERE id = ? WHERE estado=1 ";
         Materia m = new Materia();
         try {
             ps=con.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class ControladorMateria {
     
     public static ArrayList listarMateria(){
         ArrayList<Materia> materias=new ArrayList<>();
-        String sql="SELECT * FROM materia";
+        String sql="SELECT * FROM materia WHERE estado=1";
         try {
             ps=con.prepareStatement(sql);
             rs=ps.executeQuery();

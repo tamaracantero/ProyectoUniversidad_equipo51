@@ -60,7 +60,7 @@ public class ControladorAlumno {
      */
     public static int obtenerIdAlumnoPorDni(int dni) {
 
-        String sql = "SELECT idAlumno FROM alumno WHERE dni = ?";
+        String sql = "SELECT idAlumno FROM alumno WHERE dni = ? and estado=1";
         int idAlumno = -1;
 
         try {
@@ -181,7 +181,7 @@ public class ControladorAlumno {
      */
     public static Alumno buscarAlumnoPorDni(int dni) {
         Alumno a = new Alumno();
-        String sql = "SELECT * FROM alumno WHERE dni=?";
+        String sql = "SELECT * FROM alumno WHERE dni=? and estado=1";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
@@ -229,7 +229,7 @@ public class ControladorAlumno {
         
         public static Alumno obtenerAlumnoporid(int idAlumno){
            Alumno a= new Alumno();
-           String sql="SELECT * FROM alumno WHERE id = ? ";
+           String sql="SELECT * FROM alumno WHERE id = ? and estado=1";
            
            try {
                ps=con.prepareStatement(sql);
