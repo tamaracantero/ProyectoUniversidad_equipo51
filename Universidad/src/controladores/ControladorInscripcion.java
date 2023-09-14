@@ -42,7 +42,34 @@ public class ControladorInscripcion {
             System.out.println("ERROR METODO eliminarInscripcion() CLASE ControladorInscripcion");
         }
     }
+
+//Hecho Por Brian,Pereira( algo salió ):)
+    public static void actualizarInscripcion(int idInscripto, int nota,String Alumno, String materia) {
+        String sql = "UPDATE Inscripciones SET Nota = ?,alumno = ?, Materia = ? WHERE IDInscripto = ?";
+        
+        try   (Connection con = Conexion.conectarse();
+             PreparedStatement ps=con.prepareStatement(sql)){
+            ps.setInt(1, nota);
+            ps.setString(1, Alumno);
+            ps.setString(2, materia);
+            ps.setInt(3, idInscripto);
+
+            int filasActualizadas = ps.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                System.out.println("Inscripción actualizada con éxito.");
+            } else {
+                System.out.println("No se encontró la inscripción con IDInscripcion " + idInscripto);
+            }
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+
+       
+
+
     
     
-    
-}
+
