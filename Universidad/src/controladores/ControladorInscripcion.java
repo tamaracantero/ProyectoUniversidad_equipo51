@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.Incripcion;
 
 public class ControladorInscripcion {
         /*
@@ -64,7 +65,37 @@ public class ControladorInscripcion {
         
         } catch (SQLException e) {
             e.printStackTrace();
-        }}}
+        }}
+    
+     
+    /**HECHO POR ARIEL LAZARTE*/
+    public static void subirInscripcion(Incripcion insc) {
+        double nota = insc.getNota();
+        int idAlumno = insc.getAlumno().getIdAlumno();
+        int idMateria = insc.getMateria().getIdMateria();
+        
+        String sql = "INSERT INTO Inscripcion (nota, idAlumno, idMateria) VALUES (?,?,?) ";
+        
+        try {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            
+            if (rs.next()) {
+                insc.setIdInscripto(rs.getInt(1));
+                
+            }
+            
+    }catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null,"Error al subir la Inscripcion por nota, idAlumno, idMateria" + ex.getMessage());
+            System.out.println("ERROR METODO subirInscripcion()");
+    }
+    
+}
+}
         
 
        
