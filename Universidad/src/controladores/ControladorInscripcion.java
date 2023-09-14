@@ -64,7 +64,7 @@ public class ControladorInscripcion {
         
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }}}
         
 
        
