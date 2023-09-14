@@ -124,7 +124,26 @@ public class ControladorInscripcion {
         }
            return listaInscripciones;
  }   
-    
+        /*HECHO POR TAMARA CANTERO*/
+    public static ArrayList<Materia> obtenerMateriasCursadas(int idAlumno){
+        ArrayList<Materia> materiasCursadas=new ArrayList<>();
+
+        String sql="SELECT idMateria FROM inscripcion WHERE idAlumno=?";
+        
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                materiasCursadas.add(ControladorMateria.obtenerMateriaPorId(rs.getInt(1)));
+            }
+        }catch(SQLException ex){
+           JOptionPane.showMessageDialog(null,"Error al consultar Materias por idAlumno inscripto" + ex.getMessage());
+           System.out.println("ERROR METODO obtenerMateriasCursadas() CLASE ControladorInscripcion");
+        
+        }
+        return materiasCursadas;
+    }
     
     
     
@@ -132,7 +151,8 @@ public class ControladorInscripcion {
         
 
        
-
+//AGUANTE ELQUIPO 51
+//AGUANTE EL PAN CON MANTECA XD
 
     
     
