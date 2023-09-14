@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.Alumno;
 import modelo.Incripcion;
+import modelo.Materia;
 
 public class ControladorInscripcion {
         /*
@@ -23,7 +25,7 @@ public class ControladorInscripcion {
     static PreparedStatement ps = null;
     static ResultSet rs = null;
     
-    //	idInscripto	nota	idAlumno	idMateria
+    
     
     
     
@@ -44,7 +46,7 @@ public class ControladorInscripcion {
         }
     }
 
-//Hecho Por Brian,Pereira( algo salió ):)
+/**Hecho Por Brian,Pereira( algo salió ):) */
     public static void actualizarInscripcion(int idInscripto, int nota,String Alumno, String materia) {
         String sql = "UPDATE Inscripciones SET Nota = ?,alumno = ?, Materia = ? WHERE IDInscripto = ?";
         
@@ -74,7 +76,7 @@ public class ControladorInscripcion {
         int idAlumno = insc.getAlumno().getIdAlumno();
         int idMateria = insc.getMateria().getIdMateria();
         
-        String sql = "INSERT INTO Inscripcion (nota, idAlumno, idMateria) VALUES (?,?,?) ";
+        String sql = "INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (?,?,?) ";
         
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -95,6 +97,37 @@ public class ControladorInscripcion {
     }
     
 }
+    //	idInscripto	nota	idAlumno	idMateria
+    /**HECHO POR JUAN LASPIUR*/
+ public ArrayList obtenerInscripciones(){
+          ArrayList<Incripcion> listaInscripciones =  new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM inscripcion";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+            int idInscripto = rs.getInt(1);
+            double nota =rs.getDouble(2);
+            Alumno alum = ControladorAlumno.obtenerAlumnoporid(rs.getInt(3));
+            Materia mate = ControladorMateria.obtenerMateriaPorId(rs.getInt(4));
+            
+            Incripcion in = new Incripcion(idInscripto, idInscripto, alum, mate);
+            
+            listaInscripciones.add(in);
+            }
+            
+         
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al obtener lista de incripciones "+ex.getMessage());
+            System.out.println("Error metodo obtenerInscripciones() Clase ControladorIncripcion");
+        }
+           return listaInscripciones;
+ }   
+    
+    
+    
+    
 }
         
 
