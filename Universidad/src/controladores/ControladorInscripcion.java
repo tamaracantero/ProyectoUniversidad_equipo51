@@ -145,7 +145,35 @@ public class ControladorInscripcion {
         return materiasCursadas;
     }
     
+    //ArrayList <Incripcion> obteneermateriasNocursadas(id)
     
+    public static ArrayList<Materia> obtenermateriasNocursadas(int idAlumno) {
+        ArrayList<Materia> materias = new ArrayList<>();
+        
+        String sql= "SELECT * FROM materia WHERE estado = 1 AND aidMateria not in "
+                + "(SELECT idMateria FROM incripcion WHERE idAlumno = ?)";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Materia materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnio(rs.getInt("año"));
+                materias.add(materia);
+                        
+            }
+            
+            ps.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al consultar No Materias Cursadas por idAlumno inscripto" + ex.getMessage());
+           System.out.println("ERROR METODO obtenermateriasNocursadas() CLASE ControladorInscripcion");
+        }
+        return materias;
+    }
     
 }
         
