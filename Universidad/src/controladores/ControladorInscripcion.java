@@ -145,6 +145,8 @@ public class ControladorInscripcion {
         return materiasCursadas;
     }
     
+    /**HECHO POR ARIEL LAZARTE
+    
     //ArrayList <Incripcion> obteneermateriasNocursadas(id)
     
     public static ArrayList<Materia> obtenermateriasNocursadas(int idAlumno) {
