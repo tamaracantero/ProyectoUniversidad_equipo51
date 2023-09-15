@@ -47,14 +47,14 @@ public class ControladorInscripcion {
     }
 
 /**Hecho Por Brian,Pereira( algo salió ):) */
-    public static void actualizarInscripcion(int idInscripto, int nota,String Alumno, String materia) {
+    public static void actualizarInscripcion(int idInscripto, int nota,int Alumno, int materia) {
         String sql = "UPDATE Inscripciones SET Nota = ?,alumno = ?, Materia = ? WHERE IDInscripto = ?";
         
         try   (Connection con = Conexion.conectarse();
              PreparedStatement ps=con.prepareStatement(sql)){
             ps.setInt(1, nota);
-            ps.setString(1, Alumno);
-            ps.setString(2, materia);
+            ps.setInt(1, Alumno);
+            ps.setInt(2, materia);
             ps.setInt(3, idInscripto);
 
             int filasActualizadas = ps.executeUpdate();
@@ -145,7 +145,7 @@ public class ControladorInscripcion {
         return materiasCursadas;
     }
     
-    /**HECHO POR ARIEL LAZARTE
+    /**HECHO POR ARIEL LAZARTE*/
     
     //ArrayList <Incripcion> obteneermateriasNocursadas(id)
     
