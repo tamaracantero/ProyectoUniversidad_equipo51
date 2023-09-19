@@ -1,5 +1,6 @@
 
 package controladores;
+import static controladores.ControladorAlumno.subirAlumno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -175,30 +176,37 @@ public class ControladorInscripcion {
            System.out.println("ERROR METODO obtenermateriasNocursadas() CLASE ControladorInscripcion");
         }
         return materias;
-    }//modificar
-     public List<Incripcion> obtenerInscripciones(){
-ArrayList<Incripcion> cursadas=new ArrayList<>();
-String sql="SELECT * FROM inscripcion WHERE idAlumno = ?";
-try{
-PreparedStatement ps=con.prepareStatement (sql);
-ResultSet rs=ps.executeQuery();
-while(rs.next()){
-Incripcion insc=new Incripcion();
-insc.setIdInscripto(rs.getInt("idInscripto"));
-Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
-Materia mat=md.buscarMateria(rs.getInt("idmateria"));
-insc.setAlumno(alu);
-insc.setMateria(mat);
-insc.setNota((int) rs.getDouble("nota"));
-cursadas.add(insc);
-}
-ps.close();
-} catch (SQLException ex) { JOptionPane.showMessageDialog(null,"Error al acceder a la tabla inscripcion");
-}
-return cursadas;
+    }//modificar( prueba de conexion )
+     
+    public  ArrayList<Incripcion> obtenerIncripciones() {
+         ArrayList<Incripcion> cursadas = new ArrayList<>();
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Incripcion insc = new Incripcion();
+                insc.setIdInscripto(rs.getInt("idInscripto"));
+                int obtenerAlumnoporid = rs.getInt("idAlumno");
+                Alumno alu = ControladorAlumno.subirAlumno(obtenerAlumnoporid);
+                int obtenerMateriaPorId = rs.getInt("idMateria");
+                Materia mat = ControladorMateria.subirmateria(obtenerMateriaPorId); 
+                insc.setAlumno(alu);
+                insc.setMateria(mat);
+                insc.setNota(rs.getInt("nota"));
+                cursadas.add(insc);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion");
+        }
+        return cursadas;
+    }
 }
 
-}
+
+
+
       
 //AGUANTE ELQUIPO 51
 //AGUANTE EL PAN CON MANTECA XD
