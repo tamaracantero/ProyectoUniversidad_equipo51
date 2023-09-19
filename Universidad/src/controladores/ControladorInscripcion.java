@@ -175,12 +175,31 @@ public class ControladorInscripcion {
            System.out.println("ERROR METODO obtenermateriasNocursadas() CLASE ControladorInscripcion");
         }
         return materias;
-    }
-    
+    }//modificar
+     public List<Incripcion> obtenerInscripciones(){
+ArrayList<Incripcion> cursadas=new ArrayList<>();
+String sql="SELECT * FROM inscripcion WHERE idAlumno = ?";
+try{
+PreparedStatement ps=con.prepareStatement (sql);
+ResultSet rs=ps.executeQuery();
+while(rs.next()){
+Incripcion insc=new Incripcion();
+insc.setIdInscripto(rs.getInt("idInscripto"));
+Alumno alu=ad.buscarAlumno(rs.getInt("idAlumno"));
+Materia mat=md.buscarMateria(rs.getInt("idmateria"));
+insc.setAlumno(alu);
+insc.setMateria(mat);
+insc.setNota((int) rs.getDouble("nota"));
+cursadas.add(insc);
 }
-        
+ps.close();
+} catch (SQLException ex) { JOptionPane.showMessageDialog(null,"Error al acceder a la tabla inscripcion");
+}
+return cursadas;
+}
 
-       
+}
+      
 //AGUANTE ELQUIPO 51
 //AGUANTE EL PAN CON MANTECA XD
 
