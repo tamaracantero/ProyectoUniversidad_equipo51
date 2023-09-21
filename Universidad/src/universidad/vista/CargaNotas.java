@@ -1,5 +1,7 @@
 package universidad.vista;
 
+import controladores.ControladorAlumno;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class CargaNotas extends javax.swing.JInternalFrame {
@@ -10,6 +12,7 @@ public class CargaNotas extends javax.swing.JInternalFrame {
         initComponents();
         tabla.setModel(model);
         cabeceraTabla();
+        cargarCombo();
     }
 
 
@@ -30,7 +33,11 @@ public class CargaNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione el Alumno");
 
-        comboBox_listaAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox_listaAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBox_listaAlumnosActionPerformed(evt);
+            }
+        });
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,11 +102,19 @@ public class CargaNotas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void comboBox_listaAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_listaAlumnosActionPerformed
+       Alumno alumnoSeleccioado = (Alumno)comboBox_listaAlumnos.getSelectedItem();
+    
+      /* agregarFila(, title, WIDTH);*/
+    
+        
+    }//GEN-LAST:event_comboBox_listaAlumnosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_salir;
-    private javax.swing.JComboBox<String> comboBox_listaAlumnos;
+    private javax.swing.JComboBox<Alumno> comboBox_listaAlumnos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -114,6 +129,14 @@ model.addColumn("Nota");
 
 private void agregarFila(int codigo, String nombre, double nota){
 model.addRow(new Object []{codigo, nombre, nota});
+}
+
+private void cargarCombo(){
+ArrayList<Alumno> lista = ControladorAlumno.listaDeAlumnosActivos();
+    for (Alumno alumno : lista) {
+        comboBox_listaAlumnos.addItem(alumno);
+    }
+
 }
 
 }
