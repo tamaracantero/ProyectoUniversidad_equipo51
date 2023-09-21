@@ -4,6 +4,9 @@
  */
 package universidad.vista;
 
+import controladores.ControladorMateria;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author valkiria
@@ -15,6 +18,13 @@ public class Materia extends javax.swing.JInternalFrame {
      */
     public Materia() {
         initComponents();
+        botonGuardar.setEnabled(false);
+        botonEliminar.setEnabled(false);
+        botonBuscar.setToolTipText("Buscar una materia a partir de su codigo");
+        botonEliminar.setToolTipText("Eliminar una materia buscada");
+        botonGuardar.setToolTipText("ACtualizar/Editar los datos de una materia buscada");
+        botonNuevaMateria.setToolTipText("Registrar una nueva materia, no se le debe colocar codigo");
+    
     }
 
     /**
@@ -31,15 +41,15 @@ public class Materia extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        codigoJTextField = new javax.swing.JTextField();
+        nombreJTextField = new javax.swing.JTextField();
+        anioJTextField = new javax.swing.JTextField();
+        estadoJRadioButton = new javax.swing.JRadioButton();
+        botonBuscar = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
+        botonEliminar = new javax.swing.JButton();
+        botonNuevaMateria = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 51));
 
@@ -54,21 +64,21 @@ public class Materia extends javax.swing.JInternalFrame {
 
         jLabel5.setText("ESTADO:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        codigoJTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                codigoJTextFieldActionPerformed(evt);
             }
         });
 
-        jButton1.setText("BUSCAR");
+        botonBuscar.setText("BUSCAR");
 
-        jButton2.setText("Guardar");
+        botonGuardar.setText("Guardar");
 
-        jButton3.setText("Eliminar");
+        botonEliminar.setText("Eliminar");
 
-        jButton4.setText("Nuevo");
+        botonNuevaMateria.setText("Nuevo");
 
-        jButton5.setText("Salir");
+        botonSalir.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,28 +93,28 @@ public class Materia extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(anioJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel1)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(codigoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jButton1)))
+                            .addComponent(botonBuscar)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(botonNuevaMateria)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(botonGuardar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(botonEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5))
+                        .addComponent(botonSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton1)))
+                        .addComponent(estadoJRadioButton)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,51 +125,145 @@ public class Materia extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(codigoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonBuscar))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(anioJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jRadioButton1))
+                    .addComponent(estadoJRadioButton))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(botonGuardar)
+                    .addComponent(botonEliminar)
+                    .addComponent(botonNuevaMateria)
+                    .addComponent(botonSalir))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void codigoJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoJTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_codigoJTextFieldActionPerformed
+ private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        if(codigoJTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Primero debe ingresar un Codigo, intentelo de nuevo");
+            codigoJTextField.setText("");
+        }else{
+            try{
+                int id=Integer.parseInt(codigoJTextField.getText());
+                modelo.Materia m =ControladorMateria.obtenerMateriaPorId(id);
+                if(m.getNombre()==null){
+                    botonNuevaMateria.setEnabled(true);
+                }else{
+                    nombreJTextField.setText(m.getNombre());
+                    anioJTextField.setText(m.getAnio()+"");
+                    if(m.getEstado()>0){
+                        estadoJRadioButton.setSelected(true);
+                    }else{
+                        estadoJRadioButton.setSelected(false);
+                    }
+                    botonGuardar.setEnabled(true);
+                    botonEliminar.setEnabled(true);
+                    
+                }
+                
+            }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "El codigo ingresado no es completamente un numero, asegurese de ingresasr solo numeros, intentelo de nuevo");        
+            }
+        
+        }
+    }                                        
 
+    private void botonSalirMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        dispose();
+    }                                       
+
+    private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        int estado;
+        if (estadoJRadioButton.isSelected()) {
+            estado=1;
+        }else{estado=0;}
+        
+        modelo.Materia m=new modelo.Materia(Integer.parseInt(codigoJTextField.getText()),nombreJTextField.getText().toLowerCase(),Integer.parseInt(anioJTextField.getText()),estado);
+        ControladorMateria.ActualizarMateria(m);
+        codigoJTextField.setText("");
+        nombreJTextField.setText("");
+        anioJTextField.setText("");
+        estadoJRadioButton.setSelected(false);
+        codigoJTextField.setText("");
+        nombreJTextField.setText("");
+        anioJTextField.setText("");
+        estadoJRadioButton.setSelected(false);
+        
+        
+    }                                         
+
+    private void botonEliminarMouseClicked(java.awt.event.MouseEvent evt) {                                           
+        if (codigoJTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Primero debe buscar la materia a eliminar");
+        }else{
+            ControladorMateria.eliminarMateria(Integer.parseInt(codigoJTextField.getText()));
+        }
+        codigoJTextField.setText("");
+        nombreJTextField.setText("");
+        anioJTextField.setText("");
+        estadoJRadioButton.setSelected(false);
+        botonEliminar.setEnabled(false);
+        botonGuardar.setEnabled(false);
+    }                                          
+
+    private void botonNuevaMateriaMouseClicked(java.awt.event.MouseEvent evt) {                                               
+        codigoJTextField.setText("");
+        int estado=0;
+        if (estadoJRadioButton.isSelected()){
+            estado=1;
+        }
+        
+        modelo.Materia m=new modelo.Materia();
+        if (nombreJTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Le ha faltado agregar el nombre a la materia, intentelo de nuevo");
+            if(anioJTextField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Le ha faltado agregar el año a la materia, intentelo de nuevo");
+            }            
+        }else{
+            JOptionPane.showMessageDialog(this, "Se subira la materia sin codigo, este sera generado automaticamente");
+            m.setNombre(nombreJTextField.getText().toLowerCase());
+            m.setAnio(Integer.parseInt(anioJTextField.getText()));
+            m.setEstado(estado);
+            ControladorMateria.subirMateria(m);
+        }
+        codigoJTextField.setText("");
+        nombreJTextField.setText("");
+        anioJTextField.setText("");
+        estadoJRadioButton.setSelected(false);
+        botonEliminar.setEnabled(false);
+        botonGuardar.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTextField anioJTextField;
+    private javax.swing.JButton botonBuscar;
+    private javax.swing.JButton botonEliminar;
+    private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton botonNuevaMateria;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JTextField codigoJTextField;
+    private javax.swing.JRadioButton estadoJRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField nombreJTextField;
     // End of variables declaration//GEN-END:variables
 }
