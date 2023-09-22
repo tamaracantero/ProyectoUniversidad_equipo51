@@ -203,10 +203,39 @@ public class ControladorInscripcion {
         }
         return cursadas;
     }
+
+/**HECHO POR TAMARA CANTERO*/
+    public static ArrayList<Alumno> buscarAlumnoXMateria(int idMateria){
+        ArrayList <Alumno> alumnosEncontrados=new ArrayList<>();
+        String sql="SELECT alumno.idAlumno,dni,alumno.nombre,apellido,fechaNacimiento,alumno.estado as estadoAlumno\n" +
+                    "FROM inscripcion, alumno \n" +
+                    "WHERE inscripcion.idAlumno=alumno.idAlumno AND inscripcion.idMateria=? and alumno.estado=1";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idMateria);
+            rs = ps.executeQuery();
+            
+            while(rs.next()) {
+                Alumno a = new Alumno();
+                a.setIdAlumno(rs.getInt(1));
+                a.setDni(rs.getInt(2));
+                a.setApellido(rs.getString(3));
+                a.setNombre(rs.getString(4));
+                a.setFechaNacimiento(rs.getDate(5).toLocalDate());
+                a.setEstado(rs.getInt(6));
+                alumnosEncontrados.add(a);
+                        
+            }
+            
+            ps.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error al consultar No Materias Cursadas por idAlumno inscripto" + ex.getMessage());
+           System.out.println("ERROR METODO obtenermateriasNocursadas() CLASE ControladorInscripcion");
+        }
+        return alumnosEncontrados;
+    }
+  
 }
-
-
-
 
       
 //AGUANTE ELQUIPO 51
