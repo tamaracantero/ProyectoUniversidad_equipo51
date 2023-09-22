@@ -178,19 +178,20 @@ public class ControladorInscripcion {
         return materias;
     }//modificar( prueba de conexion )
      
-    public  ArrayList<Incripcion> obtenerIncripciones() {
+    public  ArrayList<Incripcion> obtenerIncripciones(int id) {
          ArrayList<Incripcion> cursadas = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Incripcion insc = new Incripcion();
                 insc.setIdInscripto(rs.getInt("idInscripto"));
                 int obtenerAlumnoporid = rs.getInt("idAlumno");
-                Alumno alu = ControladorAlumno.subirAlumno(obtenerAlumnoporid);
+                Alumno alu = ControladorAlumno.obtenerAlumnoporid(id);
                 int obtenerMateriaPorId = rs.getInt("idMateria");
-                Materia mat = ControladorMateria.subirmateria(obtenerMateriaPorId); 
+                Materia mat = ControladorMateria.obtenerMateriaPorId(obtenerMateriaPorId); 
                 insc.setAlumno(alu);
                 insc.setMateria(mat);
                 insc.setNota(rs.getInt("nota"));
