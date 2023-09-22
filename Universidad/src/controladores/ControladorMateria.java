@@ -40,8 +40,12 @@ public class ControladorMateria {
             }
             
         } catch (SQLException ex) {
+                    if(ex.getMessage().startsWith("(conn=")){
+                JOptionPane.showMessageDialog(null, "Error, el nombre de esa materia ya esta registrado");
+            }else{
             JOptionPane.showMessageDialog(null, "Error al Agregar una materia a la Base de Datos "+ex.getMessage());
-            System.out.println("Error en en el Metodo subirMateria, Clase ControladorMateria.");
+            System.out.println("Error en en el Metodo subirMateria, Clase ControladorMateriaCopia.");
+            }
         }
     
     }
