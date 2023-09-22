@@ -204,7 +204,7 @@ public class ControladorInscripcion {
         return cursadas;
     }
 
-/**HECHO POR TAMARA CANTERO*/
+/**HECHO POR TAMARA CANTERO con ayuda de ARIEL LAZARTE*/
     public static ArrayList<Alumno> buscarAlumnoXMateria(int idMateria){
         ArrayList <Alumno> alumnosEncontrados=new ArrayList<>();
         String sql="SELECT alumno.idAlumno,dni,alumno.nombre,apellido,fechaNacimiento,alumno.estado as estadoAlumno\n" +
