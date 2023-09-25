@@ -17,10 +17,11 @@ public class CargaNotas extends javax.swing.JInternalFrame {
         @Override
         public boolean isCellEditable(int fila, int columna) {
             if (centinela) {
-                return tabla.getSelectedRow() == fila && columna == tabla.getSelectedColumn();
+                if (fila == tabla.getSelectedRow() && 2 == tabla.getSelectedColumn()) {
+                    return true;
+                }
 
             }
-
             return false;
 
         }
@@ -51,7 +52,11 @@ public class CargaNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione el Alumno");
 
-        comboBox_listaAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox_listaAlumnos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBox_listaAlumnosItemStateChanged(evt);
+            }
+        });
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,6 +77,11 @@ public class CargaNotas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tabla);
 
         btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
 
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -143,8 +153,29 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaMouseClicked
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
-       this.dispose();      
+        this.dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void comboBox_listaAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_listaAlumnosItemStateChanged
+        Alumno alumnoSeleccionado = (Alumno) comboBox_listaAlumnos.getSelectedItem();
+        ArrayList<Incripcion> lista = ControladorInscripcion.obtenerIncripciones(alumnoSeleccionado.getIdAlumno());
+
+        for (Incripcion incripcion : lista) {
+            agregarFilaTabla(incripcion.getIdInscripto(), incripcion.getMateria().getNombre(), incripcion.getNota());
+        }
+
+
+    }//GEN-LAST:event_comboBox_listaAlumnosItemStateChanged
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+         Alumno alumno = (Alumno) comboBox_listaAlumnos.getSelectedItem();
+        int idAlumno = alumno.getIdAlumno();
+        ArrayList<Incripcion> lista = ControladorInscripcion.obtenerIncripciones(idAlumno);
+        
+        
+        
+        
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
