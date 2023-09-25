@@ -5,6 +5,7 @@ import modelo.Incripcion;
 import controladores.ControladorAlumno;
 import controladores.ControladorInscripcion;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Incripcion;
 
@@ -168,9 +169,17 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBox_listaAlumnosItemStateChanged
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-         Alumno alumno = (Alumno) comboBox_listaAlumnos.getSelectedItem();
-        int idAlumno = alumno.getIdAlumno();
-        ArrayList<Incripcion> lista = ControladorInscripcion.obtenerIncripciones(idAlumno);
+      int filaSeleccionada = tabla.getSelectedRow();
+      if(filaSeleccionada != -1){
+         int idIncripcion = (int) tabla.getValueAt(filaSeleccionada, 0);
+         int nota = (int) tabla.getValueAt(filaSeleccionada, 2);
+         int alumno = ((Alumno) comboBox_listaAlumnos.getSelectedItem()).getIdAlumno();
+         
+         ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, materia);
+      
+      }else{
+        JOptionPane.showMessageDialog(this, "Debe seleccionar la fila de la materia que desea modificar");
+      }
         
         
         
