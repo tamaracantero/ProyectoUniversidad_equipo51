@@ -229,7 +229,7 @@ public class ControladorAlumno {
         
         public static Alumno obtenerAlumnoporid(int idAlumno){
            Alumno a= new Alumno();
-           String sql="SELECT * FROM alumno WHERE id = ? and estado=1";
+           String sql="SELECT * FROM alumno WHERE idAlumno = ? and estado=1";
            
            try {
                ps=con.prepareStatement(sql);
@@ -247,7 +247,7 @@ public class ControladorAlumno {
                    
                }
            }catch (SQLException ex) {
-               JOptionPane.showMessageDialog(null, "Hubo un error al buscar alumno ");
+               JOptionPane.showMessageDialog(null, "Hubo un error al buscar alumno");
                System.out.println("Error en Obtener idAlumno, intente de nuevo");
            }
         return a;

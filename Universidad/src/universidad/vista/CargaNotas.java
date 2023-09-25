@@ -181,7 +181,7 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_salir;
-    private javax.swing.JComboBox<String> comboBox_listaAlumnos;
+    private javax.swing.JComboBox<Alumno> comboBox_listaAlumnos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -201,7 +201,7 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     private void cargarCombo() {
         ArrayList<Alumno> lista = ControladorAlumno.listaDeAlumnosActivos();
         for (Alumno alumno : lista) {
-            comboBox_listaAlumnos.addItem(alumno.toString());
+            comboBox_listaAlumnos.addItem(alumno);
         }
 
     }
