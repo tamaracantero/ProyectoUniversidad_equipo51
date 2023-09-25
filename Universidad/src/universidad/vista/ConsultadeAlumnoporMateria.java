@@ -18,7 +18,7 @@ import java.awt.event.*;
  *
  * @author Ariel Lazarte
  */
-public class ConsultadeAlumnoporMateria extends javax.swing.JFrame {
+public class ConsultadeAlumnoporMateria extends javax.swing.JInternalFrame {
 private DefaultTableModel modeloTabla = new DefaultTableModel();
 
     /**
