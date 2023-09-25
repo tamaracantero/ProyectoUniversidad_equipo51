@@ -64,12 +64,6 @@ public class Materia extends javax.swing.JInternalFrame {
 
         jLabel5.setText("ESTADO:");
 
-        codigoJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codigoJTextFieldActionPerformed(evt);
-            }
-        });
-
         botonBuscar.setText("BUSCAR");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,10 +173,6 @@ public class Materia extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void codigoJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_codigoJTextFieldActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         if(codigoJTextField.getText().isEmpty()){

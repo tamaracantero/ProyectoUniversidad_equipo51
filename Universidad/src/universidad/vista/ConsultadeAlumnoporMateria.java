@@ -47,7 +47,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         jtAlumnoporMateria = new javax.swing.JTable();
         jcbSelecciondeMateria = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Listado de Alumno por Materia");
@@ -55,6 +55,11 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         jLabel2.setText("Seleccione una materia:");
 
         jbSalirdeLista.setText("Salir");
+        jbSalirdeLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirdeListaActionPerformed(evt);
+            }
+        });
 
         jtAlumnoporMateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,6 +134,10 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     private void jcbSelecciondeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelecciondeMateriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbSelecciondeMateriaActionPerformed
+
+    private void jbSalirdeListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirdeListaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirdeListaActionPerformed
 
     /**
      * @param args the command line arguments

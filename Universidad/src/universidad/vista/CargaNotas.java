@@ -74,6 +74,11 @@ public class CargaNotas extends javax.swing.JInternalFrame {
         btn_guardar.setText("Guardar");
 
         btn_salir.setText("Salir");
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,6 +141,10 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         centinela = true;
     }//GEN-LAST:event_tablaMouseClicked
+
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
+       this.dispose();      
+    }//GEN-LAST:event_btn_salirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
