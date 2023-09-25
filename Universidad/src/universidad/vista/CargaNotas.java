@@ -187,6 +187,11 @@ public class CargaNotas extends javax.swing.JInternalFrame {
               break;
               }
           }
+          
+          System.out.println("idIncripcion "+idIncripcion);
+          System.out.println("Nota: "+nota);
+          System.out.println("Alumno: "+alumno);
+          System.out.println("materia: "+m1);
          
          ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, m1);
       

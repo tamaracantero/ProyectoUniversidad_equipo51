@@ -48,8 +48,8 @@ public class ControladorInscripcion {
     }
 
 /**Hecho Por Brian,Pereira( algo salió ):) */
-    public static void actualizarInscripcion(int idInscripto, Double nota,int Alumno, int materia) {
-        String sql = "UPDATE inscripcion SET Nota = ?, idAlumno = ?, idMateria = ? WHERE idInscripto = ?";
+    public static void actualizarInscripcion(int idInscripto, double nota,int Alumno, int materia) {
+        String sql = "UPDATE inscripcion SET nota = ?, idAlumno = ?, idMateria = ? WHERE idInscripto = ?";
         
         try   (Connection con = Conexion.conectarse();
              PreparedStatement ps=con.prepareStatement(sql)){
