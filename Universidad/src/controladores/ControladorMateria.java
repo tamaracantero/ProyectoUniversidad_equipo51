@@ -52,7 +52,7 @@ public class ControladorMateria {
     /**HECHO POR ARIEL LAZARTE*/
     
     public static Materia obtenerMateriaPorId(int idMateria) {
-        String sql = "SELECT * FROM materia WHERE id = ? WHERE estado=1 ";
+        String sql = "SELECT * FROM materia WHERE idMateria = ? AND estado = 1 ";
         Materia m = new Materia();
         try {
             ps=con.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class ControladorMateria {
                rs=ps.executeQuery();
                
             if (rs.next()) {
-                m.setidMateria(rs.getInt(1));
+                m.setIdMateria(rs.getInt(1));
                 m.setNombre(rs.getString(2));
                 m.setAnio(rs.getInt(3));
                 m.setEstado(rs.getInt(4));

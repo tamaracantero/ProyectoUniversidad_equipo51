@@ -8,8 +8,6 @@ package universidad.vista;
 import javax.swing.table.DefaultTableModel;
 import controladores.ControladorInscripcion;
 import controladores.ControladorMateria;
-import modelo.Materia;
-import modelo.Alumno;
 import java.util.ArrayList;
 import javax.swing.event.*;
 import javax.swing.*;
@@ -71,7 +69,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "DNI", "Apellido", "Nombre"
+                "ID", "", "Apellido", "Nombre"
             }
         ) {
             Class[] types = new Class [] {
@@ -134,14 +132,48 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbSelecciondeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelecciondeMateriaActionPerformed
-        infoConsultarAlumnoporMateria();
+        // TODO add your handling code here:
     }//GEN-LAST:event_jcbSelecciondeMateriaActionPerformed
 
     private void jbSalirdeListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirdeListaActionPerformed
         this.dispose();
     }//GEN-LAST:event_jbSalirdeListaActionPerformed
 
-    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ConsultadeAlumnoporMateria().setVisible(true);
+            }
+        });
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -157,25 +189,29 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         
         for (Materia materia : eleccion) { 
             jcbSelecciondeMateria.addItem(materia);
-            
         }
         
 
     }
     
-    private void infoConsultarAlumnoporMateria() {
-        Materia materia = (Materia)jcbSelecciondeMateria.getSelectedItem();
+    private void infoConsultarAlumnoporMateria(java.awt.event.ActionEvent evt) {
+        modeloTabla.addColumn("ID");
+        modeloTabla.addColumn("DNI");
+        modeloTabla.addColumn("Apellido");
+        modeloTabla.addColumn("Nombre");
+        jtAlumnoporMateria.setModel(modeloTabla);
         
-        ArrayList<Alumno> listadeAlumnos = ControladorInscripcion.buscarAlumnoXMateria(materia.getIdMateria());
         
-        for (Alumno listadeAlumno : listadeAlumnos) {
-            modeloTabla.addRow(new Object [] {listadeAlumno.getIdAlumno(),listadeAlumno.getDni(),listadeAlumno.getApellido(),listadeAlumno.getNombre()});
-            jtAlumnoporMateria.setModel(modeloTabla);
-        }
+        //ArrayList <modelo.Alumno> listadeAlumnosporMateria=controladores.ControladorInscripcion.buscarAlumnoXMateria();
+        
+        //for (modelo.Alumno XD:listadeAlumnosporMateria) {
+        //    modeloTabla.addRow(new Object[] {XD.getIdAlumno(),XD.getDni(),XD.getApellido(),XD.getNombre()});
+            
+            
+            
+        //}
        
     }
 
 }
 
-//El equipo 51 estuvo aqui
-//Equipo.rename("Area 51");
