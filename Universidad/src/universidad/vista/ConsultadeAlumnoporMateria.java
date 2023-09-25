@@ -8,6 +8,8 @@ package universidad.vista;
 import javax.swing.table.DefaultTableModel;
 import controladores.ControladorInscripcion;
 import controladores.ControladorMateria;
+import modelo.Materia;
+import modelo.Alumno;
 import java.util.ArrayList;
 import javax.swing.event.*;
 import javax.swing.*;
@@ -47,7 +49,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         jtAlumnoporMateria = new javax.swing.JTable();
         jcbSelecciondeMateria = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Listado de Alumno por Materia");
@@ -55,6 +57,11 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         jLabel2.setText("Seleccione una materia:");
 
         jbSalirdeLista.setText("Salir");
+        jbSalirdeLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirdeListaActionPerformed(evt);
+            }
+        });
 
         jtAlumnoporMateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,7 +71,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "", "Apellido", "Nombre"
+                "ID", "DNI", "Apellido", "Nombre"
             }
         ) {
             Class[] types = new Class [] {
@@ -127,44 +134,14 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbSelecciondeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelecciondeMateriaActionPerformed
-        // TODO add your handling code here:
+        infoConsultarAlumnoporMateria();
     }//GEN-LAST:event_jcbSelecciondeMateriaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultadeAlumnoporMateria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jbSalirdeListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirdeListaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirdeListaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ConsultadeAlumnoporMateria().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -180,29 +157,25 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         
         for (Materia materia : eleccion) { 
             jcbSelecciondeMateria.addItem(materia);
+            
         }
         
 
     }
     
-    private void infoConsultarAlumnoporMateria(java.awt.event.ActionEvent evt) {
-        modeloTabla.addColumn("ID");
-        modeloTabla.addColumn("DNI");
-        modeloTabla.addColumn("Apellido");
-        modeloTabla.addColumn("Nombre");
-        jtAlumnoporMateria.setModel(modeloTabla);
+    private void infoConsultarAlumnoporMateria() {
+        Materia materia = (Materia)jcbSelecciondeMateria.getSelectedItem();
         
+        ArrayList<Alumno> listadeAlumnos = ControladorInscripcion.buscarAlumnoXMateria(materia.getIdMateria());
         
-        //ArrayList <modelo.Alumno> listadeAlumnosporMateria=controladores.ControladorInscripcion.buscarAlumnoXMateria();
-        
-        //for (modelo.Alumno XD:listadeAlumnosporMateria) {
-        //    modeloTabla.addRow(new Object[] {XD.getIdAlumno(),XD.getDni(),XD.getApellido(),XD.getNombre()});
-            
-            
-            
-        //}
+        for (Alumno listadeAlumno : listadeAlumnos) {
+            modeloTabla.addRow(new Object [] {listadeAlumno.getIdAlumno(),listadeAlumno.getDni(),listadeAlumno.getApellido(),listadeAlumno.getNombre()});
+            jtAlumnoporMateria.setModel(modeloTabla);
+        }
        
     }
 
 }
 
+//El equipo 51 estuvo aqui
+//Equipo.rename("Area 51");
