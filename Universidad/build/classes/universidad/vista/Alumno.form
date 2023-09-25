@@ -54,7 +54,7 @@
                               <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="estadoJRadioButton" min="-2" max="-2" attributes="0"/>
-                                  <Component id="fNacimientoJDateChooser" min="-2" pref="146" max="-2" attributes="0"/>
+                                  <Component id="fNacimientoJDateChooser" min="-2" pref="176" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
