@@ -169,13 +169,26 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBox_listaAlumnosItemStateChanged
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-      int filaSeleccionada = tabla.getSelectedRow();
+     int filaSeleccionada = tabla.getSelectedRow();
       if(filaSeleccionada != -1){
+         ArrayList<Incripcion> listaInscripciones;
+         
          int idIncripcion = (int) tabla.getValueAt(filaSeleccionada, 0);
-         int nota = (int) tabla.getValueAt(filaSeleccionada, 2);
+         
+         double nota = (double) tabla.getValueAt(filaSeleccionada, 2);
          int alumno = ((Alumno) comboBox_listaAlumnos.getSelectedItem()).getIdAlumno();
          
-         ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, materia);
+         listaInscripciones = ControladorInscripcion.obtenerIncripciones(alumno);
+         
+          int m1=0;
+          for (Incripcion inscripcion : listaInscripciones) {
+              if(inscripcion.getIdInscripto() == idIncripcion){
+              m1 = inscripcion.getMateria().getIdMateria();
+              break;
+              }
+          }
+         
+         ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, m1);
       
       }else{
         JOptionPane.showMessageDialog(this, "Debe seleccionar la fila de la materia que desea modificar");

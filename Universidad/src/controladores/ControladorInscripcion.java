@@ -48,15 +48,15 @@ public class ControladorInscripcion {
     }
 
 /**Hecho Por Brian,Pereira( algo salió ):) */
-    public static void actualizarInscripcion(int idInscripto, int nota,int Alumno, int materia) {
-        String sql = "UPDATE Inscripciones SET Nota = ?,alumno = ?, Materia = ? WHERE IDInscripto = ?";
+    public static void actualizarInscripcion(int idInscripto, Double nota,int Alumno, int materia) {
+        String sql = "UPDATE inscripcion SET Nota = ?, idAlumno = ?, idMateria = ? WHERE idInscripto = ?";
         
         try   (Connection con = Conexion.conectarse();
              PreparedStatement ps=con.prepareStatement(sql)){
-            ps.setInt(1, nota);
-            ps.setInt(1, Alumno);
-            ps.setInt(2, materia);
-            ps.setInt(3, idInscripto);
+            ps.setDouble(1, nota);
+            ps.setInt(2, Alumno);
+            ps.setInt(3, materia);
+            ps.setInt(4, idInscripto);
 
             int filasActualizadas = ps.executeUpdate();
 
@@ -234,6 +234,10 @@ public class ControladorInscripcion {
         }
         return alumnosEncontrados;
     }
+    
+    
+    
+    
   
 }
 
