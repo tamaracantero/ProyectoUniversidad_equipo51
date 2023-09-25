@@ -4,6 +4,12 @@
  */
 package universidad.vista;
 
+import controladores.ControladorAlumno;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cosquin
@@ -15,6 +21,12 @@ public class Alumno extends javax.swing.JInternalFrame {
      */
     public Alumno() {
         initComponents();
+        btn_eliminar.setEnabled(false);
+        btn_guardar.setEnabled(false);
+        btn_buscar.setToolTipText("Busca un Alumno a partir de su dni");
+        btn_eliminar.setToolTipText("Elimina un Alumno, debe ingresasr el documento");
+        btn_guardar.setToolTipText("Luego de buscar un Alumno, puede guardar cambios realizados en sus datos");
+        btn_nuevo.setToolTipText("Registra un Nuevo Alumno, el id se genera automaticamente");
     }
 
     /**
@@ -36,8 +48,8 @@ public class Alumno extends javax.swing.JInternalFrame {
         field_documento = new javax.swing.JTextField();
         field_apellido = new javax.swing.JTextField();
         field_nombre = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        estadoJRadioButton = new javax.swing.JRadioButton();
+        fNacimientoJDateChooser = new com.toedter.calendar.JDateChooser();
         btn_guardar = new javax.swing.JButton();
         btn_nuevo = new javax.swing.JButton();
         btn_eliminar = new javax.swing.JButton();
@@ -56,15 +68,19 @@ public class Alumno extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha de Nacimiento:");
 
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+        btn_guardar.setText("Guardar");
+        btn_guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_guardarMouseClicked(evt);
             }
         });
 
-        btn_guardar.setText("Guardar");
-
         btn_nuevo.setText("Nuevo");
+        btn_nuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_nuevoMouseClicked(evt);
+            }
+        });
 
         btn_eliminar.setText("Eliminar");
 
@@ -112,8 +128,8 @@ public class Alumno extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel5)
                                 .addGap(92, 92, 92)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jRadioButton1)))))
+                                    .addComponent(estadoJRadioButton)
+                                    .addComponent(fNacimientoJDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(jLabel6))
@@ -150,34 +166,109 @@ public class Alumno extends javax.swing.JInternalFrame {
                         .addGap(31, 31, 31)
                         .addComponent(jLabel5)
                         .addGap(22, 22, 22))
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(estadoJRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                    .addComponent(fNacimientoJDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_eliminar)
                     .addComponent(btn_guardar)
+                    .addComponent(btn_eliminar)
                     .addComponent(btn_nuevo)
                     .addComponent(btn_salir))
-                .addGap(39, 39, 39))
+                .addGap(62, 62, 62))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-        // TODO add your handling code here:
+        if(field_documento.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Primero debe ingresar un documento antes de buscar");
+        }else{
+            try{
+                
+                int dni=Integer.parseInt(field_documento.getText());
+                modelo.Alumno a=ControladorAlumno.buscarAlumnoPorDni(dni);
+                if(a.getDni()!=0){
+                    field_nombre.setText(a.getNombre());
+                    field_apellido.setText(a.getApellido());
+                    estadoJRadioButton.setSelected(a.getEstado()!=0);
+                    btn_eliminar.setEnabled(true);
+                    btn_guardar.setEnabled(true);
+                    LocalDate fNA=a.getFechaNacimiento();
+                    fNacimientoJDateChooser.setDate(Date.valueOf(fNA));
+                }else{
+                    JOptionPane.showMessageDialog(this, "No se ha encontardo el alumno con ese DNI");
+                }
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "El documento debe ser ingresado sin puntos,espacios,simbolos o letras, intente de nuevo");
+            }
+        }
+    
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nuevoMouseClicked
+        modelo.Alumno a2=new modelo.Alumno();
+        
+        try{
+            a2.setApellido(field_apellido.getText());
+            a2.setNombre(field_nombre.getText());
+            a2.setDni(Integer.parseInt(field_documento.getText()));
+            a2.setEstado((estadoJRadioButton.isSelected())?1:0);
+            if(fNacimientoJDateChooser.isShowing()){
+                a2.setFechaNacimiento(fNacimientoJDateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            }
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El documento debe ser ingresado sin puntos,espacios,simbolos o letras, intente de nuevo");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "algo salio mal con el boton nueva materia");
+        }    
+        
+            ControladorAlumno.subirAlumno(a2);
+            field_apellido.setText("");
+            field_documento.setText("");
+            field_nombre.setText("");
+            estadoJRadioButton.setSelected(false);
+            fNacimientoJDateChooser.cleanup();
+            btn_eliminar.setEnabled(false);
+            btn_guardar.setEnabled(false);
+        
+    }//GEN-LAST:event_btn_nuevoMouseClicked
+
+    private void btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_guardarMouseClicked
+        modelo.Alumno a=null,a2=new modelo.Alumno();
+        if(field_documento.getText().isEmpty()){    
+            JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de intentar actualizar sus datos");
+        }else{
+            try{
+                a=ControladorAlumno.buscarAlumnoPorDni(Integer.parseInt(field_documento.getText()));
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "El documento debe ser ingresado sin puntos,espacios,simbolos o letras, intente de nuevo");
+            
+            }
+            a2.setApellido(field_apellido.getText());
+            a2.setNombre(field_nombre.getText());
+            a2.setDni(Integer.parseInt(field_documento.getText()));
+            a2.setEstado((estadoJRadioButton.isSelected())?1:0);
+            a2.setIdAlumno(a.getIdAlumno());
+            a2.setFechaNacimiento(fNacimientoJDateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            ControladorAlumno.actualizarAlumno(a2);
+                field_apellido.setText("");
+                field_documento.setText("");
+                field_nombre.setText("");
+                estadoJRadioButton.setSelected(false);
+                fNacimientoJDateChooser.cleanup();
+                btn_eliminar.setEnabled(false);
+                btn_guardar.setEnabled(false);
+        
+        }
+    }//GEN-LAST:event_btn_guardarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -186,17 +277,17 @@ public class Alumno extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_nuevo;
     private javax.swing.JButton btn_salir;
+    private javax.swing.JRadioButton estadoJRadioButton;
+    private com.toedter.calendar.JDateChooser fNacimientoJDateChooser;
     private javax.swing.JTextField field_apellido;
     private javax.swing.JTextField field_documento;
     private javax.swing.JTextField field_nombre;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
     // End of variables declaration//GEN-END:variables
 }
