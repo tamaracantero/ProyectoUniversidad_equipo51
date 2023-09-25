@@ -26,7 +26,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
      */
     public ConsultadeAlumnoporMateria() {
         initComponents();
-        infoConsultarAlumnoporMateria();
+     //   infoConsultarAlumnoporMateria();
         materiasParaElegir();
         jcbSelecciondeMateria.setToolTipText("Selecciona una materia");
     }
@@ -175,7 +175,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     // End of variables declaration//GEN-END:variables
 
     
-    private void materiasParaElegir(java.awt.event.MouseEvent evt) {
+    private void materiasParaElegir() {
         ArrayList<Materia> eleccion = controladores.ControladorMateria.listarMateria();
         
         for (Materia materia : eleccion) { 
