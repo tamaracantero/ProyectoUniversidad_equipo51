@@ -178,7 +178,7 @@ public class ControladorInscripcion {
         return materias;
     }//modificar( prueba de conexion )
      
-    public  ArrayList<Incripcion> obtenerIncripciones(int id) {
+    public static  ArrayList<Incripcion> obtenerIncripciones(int id) {
          ArrayList<Incripcion> cursadas = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
         try {

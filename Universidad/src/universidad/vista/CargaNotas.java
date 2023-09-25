@@ -1,12 +1,12 @@
 package universidad.vista;
 
-import modelo.copia.Alumno;
-import modelo.copia.Materia;
-import controladores.copia.ControladorAlumno;
-import controladores.copia.ControladorInscripcion;
+import modelo.Alumno;
+import modelo.Incripcion;
+import controladores.ControladorAlumno;
+import controladores.ControladorInscripcion;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import modelo.copia.Incripcion;
+import modelo.Incripcion;
 
 public class CargaNotas extends javax.swing.JInternalFrame {
 
@@ -14,13 +14,10 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     private boolean centinela = false;
 
     DefaultTableModel model = new DefaultTableModel() {
+        @Override
         public boolean isCellEditable(int fila, int columna) {
             if (centinela) {
-                if (tabla.getSelectedRow() == fila && columna == tabla.getSelectedColumn()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return tabla.getSelectedRow() == fila && columna == tabla.getSelectedColumn();
 
             }
 
