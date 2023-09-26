@@ -7,6 +7,7 @@ package universidad.vista;
 import controladores.*;
 import modelo.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
@@ -65,6 +66,12 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane1.setViewportView(tabla);
+
+        comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxActionPerformed(evt);
+            }
+        });
 
         btn_inscribir.setText("Inscribir");
         btn_inscribir.addActionListener(new java.awt.event.ActionListener() {
@@ -164,15 +171,26 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_inscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inscribirActionPerformed
-        // TODO add your handling code here:
+        Incripcion incripcion = new Incripcion();
+        //obtener alumno
+        incripcion.setAlumno((modelo.Alumno) comboBox.getSelectedItem());
+        //obtener id materia
+        int fila = tabla.getSelectedRow();
+        int columna = 0;
+        int idMateria = (int) model.getValueAt(fila, columna);
+        modelo.Materia materia = ControladorMateria.obtenerMateriaPorId(idMateria);
+        //------------------
+        incripcion.setMateria(materia);
+        
+        ControladorInscripcion.subirInscripcion(incripcion);
+        //JOptionPane.showMessageDialog(this, "Alumno");
+
+       
     }//GEN-LAST:event_btn_inscribirActionPerformed
 
     private void btnRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadio1ActionPerformed
-        //limpiar tabla   
-        int cantidadFilas = model.getRowCount();
-        for (int i = 0; i < cantidadFilas; i++) {
-           model.removeRow(i);
-        }
+       //limpiar tabla   
+        model.setRowCount(0);
         
         modelo.Alumno alumnoSeleccionado = (modelo.Alumno) comboBox.getSelectedItem();        
         ArrayList<modelo.Materia> lista = ControladorInscripcion.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
@@ -183,11 +201,7 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
 
     private void btnRadio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadio2ActionPerformed
          //limpiar tabla   
-        int cantidadFilas = model.getRowCount();
-        for (int i = 0; i < cantidadFilas; i++) {
-           model.removeRow(i);
-        }
-        
+        model.setRowCount(0);
         
         
         modelo.Alumno alumnoSeleccionado = (modelo.Alumno) comboBox.getSelectedItem();        
@@ -200,6 +214,13 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
+        //limpiar tabla   
+        model.setRowCount(0);
+        
+
+    }//GEN-LAST:event_comboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

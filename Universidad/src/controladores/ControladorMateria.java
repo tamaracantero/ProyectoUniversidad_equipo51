@@ -67,6 +67,7 @@ public class ControladorMateria {
                 
             }
             
+            
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Hubo un error al buscar materia ");
                System.out.println("Error en Obtener idMateria,por favor intente de nuevo");

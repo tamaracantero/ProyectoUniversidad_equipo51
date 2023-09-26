@@ -159,11 +159,7 @@ public class CargaNotas extends javax.swing.JInternalFrame {
 
     private void comboBox_listaAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBox_listaAlumnosItemStateChanged
           //limpiar tabla   
-        int cantidadFilas = model.getRowCount();
-        for (int i = 0; i < cantidadFilas; i++) {
-           model.removeRow(i);
-        }
-        
+      model.setRowCount(0);
         
         Alumno alumnoSeleccionado = (Alumno) comboBox_listaAlumnos.getSelectedItem();
         ArrayList<Incripcion> lista = ControladorInscripcion.obtenerIncripciones(alumnoSeleccionado.getIdAlumno());
