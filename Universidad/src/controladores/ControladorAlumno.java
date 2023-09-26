@@ -100,7 +100,7 @@ public class ControladorAlumno {
      */
     public static void actualizarAlumno(Alumno a) {
 
-        String sql = "UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaDeNacimiento=?,estado=? WHERE idAlumno=?";
+        String sql = "UPDATE alumno SET dni=?,apellido=?,nombre=?,fechaNacimiento=?,estado=? WHERE idAlumno=?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, a.getDni());
