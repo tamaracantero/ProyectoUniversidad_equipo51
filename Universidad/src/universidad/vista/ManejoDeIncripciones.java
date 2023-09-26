@@ -67,6 +67,11 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
+        comboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxItemStateChanged(evt);
+            }
+        });
         comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxActionPerformed(evt);
@@ -188,7 +193,13 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
         incripcion.setMateria(materia);
         
         ControladorInscripcion.subirInscripcion(incripcion);
-        //JOptionPane.showMessageDialog(this, "Alumno");
+        JOptionPane.showMessageDialog(this, "Incripción agregada con exito");
+        
+              //limpiar tabla   
+        model.setRowCount(0);
+          //radio button cambia estado
+        btnRadio1.setSelected(false);
+        btnRadio2.setSelected(false);
 
        
     }//GEN-LAST:event_btn_inscribirActionPerformed
@@ -252,9 +263,24 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
         int alumnoSeleccionado = ((modelo.Alumno) comboBox.getSelectedItem()).getIdAlumno();  
         
         ControladorInscripcion.eliminarInscripcion(alumnoSeleccionado, idMateria);
+              
+           
+             //limpiar tabla   
+        model.setRowCount(0);
+          //radio button cambia estado
+        btnRadio1.setSelected(false);
+        btnRadio2.setSelected(false);
         
         
     }//GEN-LAST:event_btn_anularActionPerformed
+
+    private void comboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxItemStateChanged
+          //limpiar tabla   
+        model.setRowCount(0);
+          //radio button cambia estado
+        btnRadio1.setSelected(false);
+        btnRadio2.setSelected(false);
+    }//GEN-LAST:event_comboBoxItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
