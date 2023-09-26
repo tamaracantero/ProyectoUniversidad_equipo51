@@ -169,13 +169,12 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBox_listaAlumnosItemStateChanged
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-     int filaSeleccionada = tabla.getSelectedRow();
+    int filaSeleccionada = tabla.getSelectedRow();
       if(filaSeleccionada != -1){
          ArrayList<Incripcion> listaInscripciones;
          
-         int idIncripcion = (int) tabla.getValueAt(filaSeleccionada, 0);
-         
-         double nota = (double) tabla.getValueAt(filaSeleccionada, 2);
+         int idIncripcion = (int) model.getValueAt(filaSeleccionada, 0);
+         double nota = Double.parseDouble((String) model.getValueAt(filaSeleccionada, 2));
          int alumno = ((Alumno) comboBox_listaAlumnos.getSelectedItem()).getIdAlumno();
          
          listaInscripciones = ControladorInscripcion.obtenerIncripciones(alumno);
@@ -187,16 +186,12 @@ public class CargaNotas extends javax.swing.JInternalFrame {
               break;
               }
           }
-          
-          System.out.println("idIncripcion "+idIncripcion);
-          System.out.println("Nota: "+nota);
-          System.out.println("Alumno: "+alumno);
-          System.out.println("materia: "+m1);
-         
          ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, m1);
-      
+         JOptionPane.showMessageDialog(this, "Nota modificada con exito");
+         
+         
       }else{
-        JOptionPane.showMessageDialog(this, "Debe seleccionar la fila de la materia que desea modificar");
+          JOptionPane.showMessageDialog(this, "Debe seleccionar la fila de la materia que desea modificar");
       }
         
         
