@@ -81,6 +81,11 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
         });
 
         btn_anular.setText("Anular Inscripción");
+        btn_anular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anularActionPerformed(evt);
+            }
+        });
 
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -237,6 +242,19 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_comboBoxActionPerformed
+
+    private void btn_anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anularActionPerformed
+             //obtener id materia
+        int fila = tabla.getSelectedRow();
+        int columna = 0;
+        int idMateria = (int) model.getValueAt(fila, columna);
+            //obtener idAlumno
+        int alumnoSeleccionado = ((modelo.Alumno) comboBox.getSelectedItem()).getIdAlumno();  
+        
+        ControladorInscripcion.eliminarInscripcion(alumnoSeleccionado, idMateria);
+        
+        
+    }//GEN-LAST:event_btn_anularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
