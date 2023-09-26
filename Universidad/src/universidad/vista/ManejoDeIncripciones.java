@@ -189,7 +189,15 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_inscribirActionPerformed
 
     private void btnRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadio1ActionPerformed
-       //limpiar tabla   
+          //deshabilitar btn_incripcion
+         btn_inscribir.setEnabled(false); 
+         //habilitar btn_anular
+         btn_anular.setEnabled(true); 
+         
+          //cambiar radio button estado
+        btnRadio2.setSelected(false);
+         
+        //limpiar tabla   
         model.setRowCount(0);
         
         modelo.Alumno alumnoSeleccionado = (modelo.Alumno) comboBox.getSelectedItem();        
@@ -200,7 +208,15 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRadio1ActionPerformed
 
     private void btnRadio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadio2ActionPerformed
-         //limpiar tabla   
+          //habilitar btn_incripcion
+         btn_inscribir.setEnabled(true);
+          //deshabilitar btn_anular
+         btn_anular.setEnabled(false); 
+        
+          //radio button cambia estado
+        btnRadio1.setSelected(false);
+         
+        //limpiar tabla   
         model.setRowCount(0);
         
         
