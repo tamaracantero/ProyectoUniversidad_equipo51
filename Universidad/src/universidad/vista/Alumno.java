@@ -83,6 +83,11 @@ public class Alumno extends javax.swing.JInternalFrame {
         });
 
         btn_eliminar.setText("Eliminar");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
 
         btn_salir.setText("Salir");
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
@@ -269,6 +274,22 @@ public class Alumno extends javax.swing.JInternalFrame {
         
         }
     }//GEN-LAST:event_btn_guardarMouseClicked
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        if(field_documento.getText().isEmpty()){    
+            JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de intentar darle de baja");
+        }else{
+            ControladorAlumno.eliminarAlumno(ControladorAlumno.buscarAlumnoPorDni(Integer.parseInt(field_documento.getText())).getIdAlumno());
+            field_apellido.setText("");
+            field_documento.setText("");
+            field_nombre.setText("");
+            estadoJRadioButton.setSelected(false);
+            fNacimientoJDateChooser.setName("");
+            btn_eliminar.setEnabled(false);
+            btn_guardar.setEnabled(false);
+        
+        }
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
