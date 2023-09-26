@@ -12,9 +12,6 @@ import modelo.Alumno;
 import modelo.Materia;
 import java.util.ArrayList;
 import javax.swing.event.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 
 
@@ -30,7 +27,6 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
      */
     public ConsultadeAlumnoporMateria() {
         initComponents();
-     //   infoConsultarAlumnoporMateria();
         infoConsultarAlumnoporMateria();
         materiasParaElegir();
         jcbSelecciondeMateria.setToolTipText("Selecciona una materia");
@@ -137,7 +133,6 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbSelecciondeMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelecciondeMateriaActionPerformed
-        // TODO add your handling code here:
         infoConsultarAlumnoporMateria();
     }//GEN-LAST:event_jcbSelecciondeMateriaActionPerformed
 
@@ -200,30 +195,16 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
 
     }
     
-    private void infoConsultarAlumnoporMateria(java.awt.event.ActionEvent evt) {
-        modeloTabla.addColumn("ID");
-        modeloTabla.addColumn("DNI");
-        modeloTabla.addColumn("Apellido");
-        modeloTabla.addColumn("Nombre");
-        jtAlumnoporMateria.setModel(modeloTabla);
     private void infoConsultarAlumnoporMateria() {
         modelo.Materia materia = (modelo.Materia)jcbSelecciondeMateria.getSelectedItem();
         
         ArrayList<modelo.Alumno> listadeAlumnos = ControladorInscripcion.buscarAlumnoXMateria(materia.getIdMateria());
         
-        //ArrayList <modelo.Alumno> listadeAlumnosporMateria=controladores.ControladorInscripcion.buscarAlumnoXMateria();
         for (modelo.Alumno listadeAlumno : listadeAlumnos) {
             modeloTabla.addRow(new Object [] {listadeAlumno.getIdAlumno(),listadeAlumno.getDni(),listadeAlumno.getApellido(),listadeAlumno.getNombre()});
             jtAlumnoporMateria.setModel(modeloTabla);
         }
         
-        //for (modelo.Alumno XD:listadeAlumnosporMateria) {
-        //    modeloTabla.addRow(new Object[] {XD.getIdAlumno(),XD.getDni(),XD.getApellido(),XD.getNombre()});
-            
-            
-            
-        //}
-       
     }
 
 }
