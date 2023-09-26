@@ -279,12 +279,12 @@ public class Alumno extends javax.swing.JInternalFrame {
         if(field_documento.getText().isEmpty()){    
             JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de intentar darle de baja");
         }else{
-            ControladorAlumno.eliminarAlumno(ControladorAlumno.buscarAlumnoPorDni(Integer.parseInt(field_documento.getText())).getIdAlumno());
+            ControladorAlumno.eliminarAlumno(ControladorAlumno.buscarAlumnoPorDni2(Integer.parseInt(field_documento.getText())).getIdAlumno());
             field_apellido.setText("");
             field_documento.setText("");
             field_nombre.setText("");
             estadoJRadioButton.setSelected(false);
-            fNacimientoJDateChooser.setName("");
+            fNacimientoJDateChooser.cleanup();
             btn_eliminar.setEnabled(false);
             btn_guardar.setEnabled(false);
         

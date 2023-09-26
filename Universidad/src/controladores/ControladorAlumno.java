@@ -200,6 +200,28 @@ public class ControladorAlumno {
         }
         return a;
     }
+    /**HECHO POR TAMARA CANTERO lo necesito para que me busque tambien los alumnos con estado=0*/
+    public static Alumno buscarAlumnoPorDni2(int dni) {
+        Alumno a = new Alumno();
+        String sql = "SELECT * FROM alumno WHERE dni=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                a.setIdAlumno(rs.getInt(1));
+                a.setDni(rs.getInt(2));
+                a.setApellido(rs.getString(3));
+                a.setNombre(rs.getString(4));
+                a.setFechaNacimiento(rs.getDate(5).toLocalDate());
+                a.setEstado(rs.getInt(6));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Buscar alumno alumno" + ex.getMessage());
+            System.out.println("Error en en el Metodo buscarAlumnoPorDni, Clase ControladorAlumno.");
+        }
+        return a;
+    }
     
 /**
      * HECHO POR BRIAN PEREIRA
