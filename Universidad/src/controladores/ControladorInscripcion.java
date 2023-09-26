@@ -153,8 +153,8 @@ public class ControladorInscripcion {
     public static ArrayList<Materia> obtenermateriasNocursadas(int idAlumno) {
         ArrayList<Materia> materias = new ArrayList<>();
         
-        String sql= "SELECT * FROM materia WHERE estado = 1 AND aidMateria not in "
-                + "(SELECT idMateria FROM incripcion WHERE idAlumno = ?)";
+        String sql= "SELECT * FROM materia WHERE estado = 1 AND idMateria not in "
+                + "(SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -165,7 +165,7 @@ public class ControladorInscripcion {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("año"));
+                materia.setAnio(rs.getInt("anio"));
                 materias.add(materia);
                         
             }
