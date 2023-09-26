@@ -27,7 +27,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
      */
     public ConsultadeAlumnoporMateria() {
         initComponents();
-        infoConsultarAlumnoporMateria();
+       // infoConsultarAlumnoporMateria();
         materiasParaElegir();
         jcbSelecciondeMateria.setToolTipText("Selecciona una materia");
     }
