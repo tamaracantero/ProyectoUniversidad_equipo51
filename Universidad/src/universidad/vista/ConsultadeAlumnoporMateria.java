@@ -148,7 +148,8 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     }
     
     private void infoConsultarAlumnoporMateria() { //modifica la tabla
-        
+          //limpiar tabla   
+        modeloTabla.setRowCount(0);
         modelo.Materia materia = (modelo.Materia)jcbSelecciondeMateria.getSelectedItem();
         
         ArrayList<modelo.Alumno> listadeAlumnos = ControladorInscripcion.buscarAlumnoXMateria(materia.getIdMateria());
