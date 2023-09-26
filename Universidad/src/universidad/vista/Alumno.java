@@ -240,7 +240,7 @@ public class Alumno extends javax.swing.JInternalFrame {
             field_documento.setText("");
             field_nombre.setText("");
             estadoJRadioButton.setSelected(false);
-            fNacimientoJDateChooser.cleanup();
+            fNacimientoJDateChooser.setCalendar(null);
             btn_eliminar.setEnabled(false);
             btn_guardar.setEnabled(false);
         
@@ -268,7 +268,7 @@ public class Alumno extends javax.swing.JInternalFrame {
                 field_documento.setText("");
                 field_nombre.setText("");
                 estadoJRadioButton.setSelected(false);
-                fNacimientoJDateChooser.cleanup();
+                fNacimientoJDateChooser.setCalendar(null);
                 btn_eliminar.setEnabled(false);
                 btn_guardar.setEnabled(false);
         
@@ -284,7 +284,7 @@ public class Alumno extends javax.swing.JInternalFrame {
             field_documento.setText("");
             field_nombre.setText("");
             estadoJRadioButton.setSelected(false);
-            fNacimientoJDateChooser.cleanup();
+            fNacimientoJDateChooser.setCalendar(null);
             btn_eliminar.setEnabled(false);
             btn_guardar.setEnabled(false);
         
