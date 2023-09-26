@@ -134,4 +134,25 @@ public class ControladorMateria {
         }
         return materias;
     }
+    /**HECHO POR TAMARA CANTERO */
+    public static Materia buscarMateriaPorNombre(String nombre){
+        Materia m=new Materia();
+        String sql = "SELECT * FROM materia WHERE nombre=?";
+        try{
+            ps=con.prepareStatement(sql);
+            ps.setString(1, nombre.toLowerCase());
+            rs=ps.executeQuery();
+            
+            while (rs.next()) {
+                m.setIdMateria(rs.getInt(1));
+                m.setNombre(rs.getString(2));
+                m.setAnio(rs.getInt(3));
+                m.setEstado(rs.getInt(4));
+            }
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al buscar materia por nombre, intente de nuevo "+e.getMessage());
+        }
+        return m;
+    }
 }

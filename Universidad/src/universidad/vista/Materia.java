@@ -24,6 +24,7 @@ public class Materia extends javax.swing.JInternalFrame {
         botonEliminar.setToolTipText("Eliminar una materia buscada");
         botonGuardar.setToolTipText("ACtualizar/Editar los datos de una materia buscada");
         botonNuevaMateria.setToolTipText("Registrar una nueva materia, no se le debe colocar codigo");
+        buscar2.setToolTipText("Busca una materia a partir de su nombre");
     
     }
 
@@ -50,6 +51,7 @@ public class Materia extends javax.swing.JInternalFrame {
         botonEliminar = new javax.swing.JButton();
         botonNuevaMateria = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
+        buscar2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 51));
 
@@ -99,6 +101,13 @@ public class Materia extends javax.swing.JInternalFrame {
             }
         });
 
+        buscar2.setText("BUSCAR");
+        buscar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,7 +126,9 @@ public class Materia extends javax.swing.JInternalFrame {
                                     .addComponent(nombreJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(anioJTextField)
-                                        .addGap(121, 121, 121))))
+                                        .addGap(121, 121, 121)))
+                                .addGap(18, 18, 18)
+                                .addComponent(buscar2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(botonNuevaMateria)
                                 .addGap(18, 18, 18)
@@ -155,7 +166,8 @@ public class Materia extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(nombreJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscar2))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -270,6 +282,36 @@ public class Materia extends javax.swing.JInternalFrame {
         botonGuardar.setEnabled(false);
     }//GEN-LAST:event_botonNuevaMateriaActionPerformed
 
+    private void buscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar2ActionPerformed
+        if(nombreJTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Primero debe ingresar un Codigo, intentelo de nuevo");
+            nombreJTextField.setText("");
+        }else{
+            try{
+                String nombre=nombreJTextField.getText().toLowerCase();
+                modelo.Materia m =ControladorMateria.buscarMateriaPorNombre(nombre);
+                if(m.getNombre()==null){
+                    botonNuevaMateria.setEnabled(true);
+                }else{
+                    codigoJTextField.setText(m.getIdMateria()+"");
+                    anioJTextField.setText(m.getAnio()+"");
+                    if(m.getEstado()>0){
+                        estadoJRadioButton.setSelected(true);
+                    }else{
+                        estadoJRadioButton.setSelected(false);
+                    }
+                    botonGuardar.setEnabled(true);
+                    botonEliminar.setEnabled(true);
+                    
+                }
+                
+            }catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "no se ha encontrado la materia con ese nombre, intentelo de nuevo ingresando el nombre correcto, completo u otro nombre");        
+            }
+        
+        }
+    }//GEN-LAST:event_buscar2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anioJTextField;
@@ -278,6 +320,7 @@ public class Materia extends javax.swing.JInternalFrame {
     private javax.swing.JButton botonGuardar;
     private javax.swing.JButton botonNuevaMateria;
     private javax.swing.JButton botonSalir;
+    private javax.swing.JButton buscar2;
     private javax.swing.JTextField codigoJTextField;
     private javax.swing.JRadioButton estadoJRadioButton;
     private javax.swing.JLabel jLabel1;
