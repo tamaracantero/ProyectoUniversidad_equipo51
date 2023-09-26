@@ -126,8 +126,6 @@ public class ControladorMateria {
             rs=ps.executeQuery();
             while(rs.next()){
                 materias.add(new Materia(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4)));
-                JOptionPane.showMessageDialog(null, "materias listadas exitoamente");
-            
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar materias, intente de nuevo "+ex.getMessage());

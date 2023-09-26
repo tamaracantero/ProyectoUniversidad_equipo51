@@ -14,9 +14,11 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     
     public ConsultadeAlumnoporMateria() {
         initComponents();
-        infoConsultarAlumnoporMateria();
-        materiasParaElegir();
-        jcbSelecciondeMateria.setToolTipText("Selecciona una materia");
+        jtAlumnosporMateria.setModel(modeloTabla); //seteando modelo a la tabla
+        crearCabecera();
+        materiasParaElegir(); //comboBox
+        jcbSelecciondeMateria.setToolTipText("Selecciona una materia"); //cartel de ayuda
+    
     }
 
 
@@ -31,7 +33,7 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         jtAlumnosporMateria = new javax.swing.JTable();
         jbSalirdeLista = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Listado de alumno por Materia");
@@ -39,6 +41,11 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Seleccione una Materia:");
 
+        jcbSelecciondeMateria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbSelecciondeMateriaItemStateChanged(evt);
+            }
+        });
         jcbSelecciondeMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbSelecciondeMateriaActionPerformed(evt);
@@ -70,6 +77,10 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jbSalirdeLista, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -81,13 +92,9 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
                         .addGap(196, 196, 196)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(19, 19, 19)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jbSalirdeLista, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,9 +105,9 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbSelecciondeMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jbSalirdeLista, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -116,6 +123,10 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         this.dispose();
     }//GEN-LAST:event_jbSalirdeListaActionPerformed
 
+    private void jcbSelecciondeMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSelecciondeMateriaItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbSelecciondeMateriaItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -125,7 +136,8 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
     private javax.swing.JTable jtAlumnosporMateria;
     // End of variables declaration//GEN-END:variables
 
-    private void materiasParaElegir() {
+    private void materiasParaElegir() {    //Metodo que carga el comboBox
+    
         ArrayList<Materia> eleccion = controladores.ControladorMateria.listarMateria();
         
         for (Materia materia : eleccion) { 
@@ -135,7 +147,8 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
 
     }
     
-    private void infoConsultarAlumnoporMateria() {
+    private void infoConsultarAlumnoporMateria() { //modifica la tabla
+        
         modelo.Materia materia = (modelo.Materia)jcbSelecciondeMateria.getSelectedItem();
         
         ArrayList<modelo.Alumno> listadeAlumnos = ControladorInscripcion.buscarAlumnoXMateria(materia.getIdMateria());
@@ -147,6 +160,14 @@ private DefaultTableModel modeloTabla = new DefaultTableModel();
         
     }
 
+    private void crearCabecera(){
+        modeloTabla.addColumn("ID");      
+        modeloTabla.addColumn("DNI");  
+        modeloTabla.addColumn("Apellido");
+        modeloTabla.addColumn("Nombre");
+    
+    }
+    
 
 }
 
