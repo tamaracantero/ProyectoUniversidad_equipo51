@@ -177,7 +177,7 @@ public class CargaNotas extends javax.swing.JInternalFrame {
          ArrayList<Incripcion> listaInscripciones;
          
          int idIncripcion = (int) model.getValueAt(filaSeleccionada, 0);
-         double nota = Double.parseDouble((String) model.getValueAt(filaSeleccionada, 2));
+         double nota =Double.parseDouble(model.getValueAt(filaSeleccionada, 2).toString());
          int alumno = ((Alumno) comboBox_listaAlumnos.getSelectedItem()).getIdAlumno();
          
          listaInscripciones = ControladorInscripcion.obtenerIncripciones(alumno);
