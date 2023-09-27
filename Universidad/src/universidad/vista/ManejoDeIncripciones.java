@@ -26,7 +26,7 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
         tabla.setModel(model);
         agregarCabeceraTabla();
         btn_anular.setEnabled(false);
-        btnRadio1.setEnabled(false);
+        btn_inscribir.setEnabled(false);
     }
     
     @SuppressWarnings("unchecked")
