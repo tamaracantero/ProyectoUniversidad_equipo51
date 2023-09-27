@@ -175,9 +175,15 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     int filaSeleccionada = tabla.getSelectedRow();
       if(filaSeleccionada != -1){
          ArrayList<Incripcion> listaInscripciones;
-         
+         double nota=0.0;
+         boolean flag=false;
          int idIncripcion = (int) model.getValueAt(filaSeleccionada, 0);
-         double nota =Double.parseDouble(model.getValueAt(filaSeleccionada, 2).toString());
+         try{
+             nota =Double.parseDouble(model.getValueAt(filaSeleccionada, 2).toString());
+             flag=true;
+         }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(this, "ingrese solo numeros, si es decimal separe decimales con un punto");
+         }
          int alumno = ((Alumno) comboBox_listaAlumnos.getSelectedItem()).getIdAlumno();
          
          listaInscripciones = ControladorInscripcion.obtenerIncripciones(alumno);
@@ -189,8 +195,10 @@ public class CargaNotas extends javax.swing.JInternalFrame {
               break;
               }
           }
-         ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, m1);
-         JOptionPane.showMessageDialog(this, "Nota modificada con exito");
+         if(flag){
+             ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, m1);
+             JOptionPane.showMessageDialog(this, "Nota modificada con exito");
+         }
          
          
       }else{
