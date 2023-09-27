@@ -54,6 +54,7 @@ public class Materia extends javax.swing.JInternalFrame {
         buscar2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 51));
+        setForeground(new java.awt.Color(0, 153, 51));
 
         jLabel1.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel1.setText("Materias");
@@ -127,7 +128,6 @@ public class Materia extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(anioJTextField)
                                         .addGap(121, 121, 121)))
-                                .addGap(18, 18, 18)
                                 .addComponent(buscar2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(botonNuevaMateria)

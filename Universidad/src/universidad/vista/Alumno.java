@@ -57,6 +57,7 @@ public class Alumno extends javax.swing.JInternalFrame {
         btn_salir = new javax.swing.JButton();
         btn_buscar = new javax.swing.JButton();
 
+        jLabel1.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel1.setText("Alumno");
 
         jLabel2.setText("Documento:");
@@ -177,7 +178,7 @@ public class Alumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(fNacimientoJDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_guardar)
                     .addComponent(btn_eliminar)

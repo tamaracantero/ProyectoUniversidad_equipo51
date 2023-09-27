@@ -111,7 +111,7 @@
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <Component id="fNacimientoJDateChooser" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_guardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -126,6 +126,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SimSun" size="24" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Alumno"/>
       </Properties>
     </Component>

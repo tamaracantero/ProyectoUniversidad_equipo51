@@ -50,6 +50,7 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
 
         jLabel1.setText("jLabel1");
 
+        jLabel2.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         jLabel2.setText("Formulario de Incripcion");
 
         jLabel3.setText("Seleccione un alumno:");
@@ -121,23 +122,16 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(34, 34, 34)
-                            .addComponent(btn_inscribir)
-                            .addGap(43, 43, 43)
-                            .addComponent(btn_anular)
-                            .addGap(27, 27, 27)
-                            .addComponent(btn_salir))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(jLabel2))
+                                .addComponent(btn_inscribir)
+                                .addGap(43, 43, 43)
+                                .addComponent(btn_anular)
+                                .addGap(27, 27, 27)
+                                .addComponent(btn_salir))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnRadio1)
@@ -146,11 +140,16 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jLabel4)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
