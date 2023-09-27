@@ -25,8 +25,7 @@ public class ManejoDeIncripciones extends javax.swing.JInternalFrame {
         cargarCombo();
         tabla.setModel(model);
         agregarCabeceraTabla();
-        btn_anular.setEnabled(false);
-        btn_inscribir.setEnabled(false);
+        
     }
     
     @SuppressWarnings("unchecked")
