@@ -25,7 +25,7 @@ public class Alumno extends javax.swing.JInternalFrame {
         btn_eliminar.setEnabled(false);
         btn_guardar.setEnabled(false);
         btn_buscar.setToolTipText("Busca un Alumno a partir de su dni");
-        btn_eliminar.setToolTipText("Elimina un Alumno, debe ingresasr el documento");
+        btn_eliminar.setToolTipText("Elimina un Alumno, debe ingresasr el documento de 8 digitos");
         btn_guardar.setToolTipText("Luego de buscar un Alumno, puede guardar cambios realizados en sus datos");
         btn_nuevo.setToolTipText("Registra un Nuevo Alumno, el id se genera automaticamente");
     }
@@ -197,6 +197,8 @@ public class Alumno extends javax.swing.JInternalFrame {
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         if (field_documento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Primero debe ingresar un documento antes de buscar");
+        } else if(field_documento.getText().length()!=8){
+            JOptionPane.showMessageDialog(this, "El documento debe poseer 8 digitos, evite los espacios en blanco y otros simbolos");
         } else {
             try {
 
@@ -222,16 +224,21 @@ public class Alumno extends javax.swing.JInternalFrame {
 
     private void btn_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nuevoMouseClicked
         modelo.Alumno a2 = new modelo.Alumno();
-        int r = 0;
+        int r = 0,r2=0;
         try {
             a2.setApellido(field_apellido.getText());
             a2.setNombre(field_nombre.getText());
+        if (field_documento.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de registrar sus datos");
+        } else if(field_documento.getText().length()!=8){
+            JOptionPane.showMessageDialog(this, "El documento debe poseer 8 digitos, evite los espacios en blanco y otros simbolos");
+        }else{
             a2.setDni(Integer.parseInt(field_documento.getText()));
+            r2=1;
+        }
             a2.setEstado((estadoJRadioButton.isSelected()) ? 1 : 0);
             LocalDate jdc = fNacimientoJDateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             if (fNacimientoJDateChooser.isShowing()) {
-                System.out.println(jdc.getYear());
-                System.out.println(LocalDate.now().getYear() - 18);
                 int ya = jdc.getYear();
                 int yn = LocalDate.now().getYear() - 18;
                 if (ya > yn) {
@@ -254,7 +261,7 @@ public class Alumno extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "algo salio mal con el boton nueva materia");
         }
-        if (r == 1) {
+        if (r == 1 &&r2==1) {
             ControladorAlumno.subirAlumno(a2);
         } else {
             JOptionPane.showMessageDialog(this, "No se ha agregado al alumno");
@@ -273,7 +280,9 @@ public class Alumno extends javax.swing.JInternalFrame {
         modelo.Alumno a = null, a2 = new modelo.Alumno();
         if (field_documento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de intentar actualizar sus datos");
-        } else {
+        } else if(field_documento.getText().length()!=8){
+            JOptionPane.showMessageDialog(this, "El documento debe poseer 8 digitos, evite los espacios en blanco y otros simbolos");
+        }else{
             try {
                 a = ControladorAlumno.buscarAlumnoPorDni(Integer.parseInt(field_documento.getText()));
             } catch (NumberFormatException e) {
@@ -301,7 +310,9 @@ public class Alumno extends javax.swing.JInternalFrame {
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
         if (field_documento.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de intentar darle de baja");
-        } else {
+        }  else if(field_documento.getText().length()!=8){
+            JOptionPane.showMessageDialog(this, "El documento debe poseer 8 digitos, evite los espacios en blanco y otros simbolos no numericos");
+        }else {
             ControladorAlumno.eliminarAlumno(ControladorAlumno.buscarAlumnoPorDni2(Integer.parseInt(field_documento.getText())).getIdAlumno());
             field_apellido.setText("");
             field_documento.setText("");
