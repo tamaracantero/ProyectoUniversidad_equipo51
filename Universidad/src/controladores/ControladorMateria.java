@@ -74,7 +74,31 @@ public class ControladorMateria {
         }
         return m;
     }
+    /**HECHO POR ARIEL LAZARTE copia de Tamara Cantero para materias inactivas incluidas*/
     
+    public static Materia obtenerMateriaPorId2(int idMateria) {
+        String sql = "SELECT * FROM materia WHERE idMateria = ?";
+        Materia m = new Materia();
+        try {
+            ps=con.prepareStatement(sql);
+               ps.setInt(1, idMateria);
+               rs=ps.executeQuery();
+               
+            if (rs.next()) {
+                m.setIdMateria(rs.getInt(1));
+                m.setNombre(rs.getString(2));
+                m.setAnio(rs.getInt(3));
+                m.setEstado(rs.getInt(4));
+                
+            }
+            
+            
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Hubo un error al buscar materia ");
+               System.out.println("Error en Obtener idMateria,por favor intente de nuevo");
+        }
+        return m;
+    }
      /**HECHO POR BRIAN PEREIRA*/
     public static void ActualizarMateria(Materia m) {
         String sql = "UPDATE materia SET Nombre=?,Anio=?,Estado=? WHERE idMateria=?";

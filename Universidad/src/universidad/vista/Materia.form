@@ -42,7 +42,6 @@
                                       <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="buscar2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
