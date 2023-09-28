@@ -229,8 +229,9 @@ public class Materia extends javax.swing.JInternalFrame {
         }else{estado=0;}
         
         modelo.Materia m=new modelo.Materia(Integer.parseInt(codigoJTextField.getText()),nombreJTextField.getText().toLowerCase(),Integer.parseInt(anioJTextField.getText()),estado);
-        ControladorMateria.ActualizarMateria(m);
-        codigoJTextField.setText("");
+        if((nombreJTextField.getText()).toLowerCase()!=(ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre()).toLowerCase()){
+            ControladorMateria.ActualizarMateria(m);
+            codigoJTextField.setText("");
         nombreJTextField.setText("");
         anioJTextField.setText("");
         estadoJRadioButton.setSelected(false);
@@ -238,6 +239,10 @@ public class Materia extends javax.swing.JInternalFrame {
         nombreJTextField.setText("");
         anioJTextField.setText("");
         estadoJRadioButton.setSelected(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "Ya existe una materia con ese nombre, elija otro");
+        }
+        
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
@@ -273,13 +278,16 @@ public class Materia extends javax.swing.JInternalFrame {
             m.setAnio(Integer.parseInt(anioJTextField.getText()));
             m.setEstado(estado);
             ControladorMateria.subirMateria(m);
+            codigoJTextField.setText("");
+            nombreJTextField.setText("");
+            anioJTextField.setText("");
+            estadoJRadioButton.setSelected(false);
+            botonEliminar.setEnabled(false);
+            botonGuardar.setEnabled(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "Ya existe una materia con ese nombre, elija otro");
         }
-        codigoJTextField.setText("");
-        nombreJTextField.setText("");
-        anioJTextField.setText("");
-        estadoJRadioButton.setSelected(false);
-        botonEliminar.setEnabled(false);
-        botonGuardar.setEnabled(false);
+        
     }//GEN-LAST:event_botonNuevaMateriaActionPerformed
 
     private void buscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar2ActionPerformed
