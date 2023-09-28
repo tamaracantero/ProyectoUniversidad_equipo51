@@ -196,8 +196,12 @@ public class CargaNotas extends javax.swing.JInternalFrame {
               }
           }
          if(flag){
-             ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, m1);
-             JOptionPane.showMessageDialog(this, "Nota modificada con exito");
+             if(nota>10.0 || nota<0.0){
+                 JOptionPane.showMessageDialog(this, "la nota no puede ser mayor a 10.0 ni menor a 0.0, no se actualizo la nota");
+             }else{
+                 ControladorInscripcion.actualizarInscripcion(idIncripcion, nota,alumno, m1);
+                 JOptionPane.showMessageDialog(this, "Nota modificada con exito");
+             }
          }
          
          

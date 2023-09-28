@@ -224,21 +224,46 @@ public class Alumno extends javax.swing.JInternalFrame {
 
     private void btn_nuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nuevoMouseClicked
         modelo.Alumno a2 = new modelo.Alumno();
-        int r = 0,r2=0;
+        
+        //SI NO FALTA NINGUN DATO, TOMARAN VALOR 1 PARA DAR LUZ VERDE
+        int r1 = 0,r2=0,r3=0,r4=0;
         try {
-            a2.setApellido(field_apellido.getText());
-            a2.setNombre(field_nombre.getText());
-        if (field_documento.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de registrar sus datos");
-        } else if(field_documento.getText().length()!=8){
-            JOptionPane.showMessageDialog(this, "El documento debe poseer 8 digitos, evite los espacios en blanco y otros simbolos");
-        }else{
-            a2.setDni(Integer.parseInt(field_documento.getText()));
-            r2=1;
-        }
+
+            if (field_apellido.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el apellido del alumno");
+            }else {
+                a2.setApellido(field_apellido.getText());
+                r1=1;
+            }
+            
+
+            if (field_nombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el nombre del alumno");
+            }else {
+                a2.setNombre(field_nombre.getText());
+                r2=1;
+            }
+            
+            
+            
+            if (field_documento.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar el n° de documento del Alumno antes de registrar sus datos");
+            } else if(field_documento.getText().length()!=8){
+                JOptionPane.showMessageDialog(this, "El documento debe poseer 8 digitos, evite los espacios en blanco y otros simbolos");
+            }else{
+                a2.setDni(Integer.parseInt(field_documento.getText()));
+                r3=1;
+            }
+            
+            
             a2.setEstado((estadoJRadioButton.isSelected()) ? 1 : 0);
-            LocalDate jdc = fNacimientoJDateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            
             if (fNacimientoJDateChooser.isShowing()) {
+                
+                
+                LocalDate jdc = fNacimientoJDateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                
                 int ya = jdc.getYear();
                 int yn = LocalDate.now().getYear() - 18;
                 if (ya > yn) {
@@ -250,30 +275,34 @@ public class Alumno extends javax.swing.JInternalFrame {
                     fNacimientoJDateChooser.setCalendar(null);
                     btn_eliminar.setEnabled(false);
                     btn_guardar.setEnabled(false);
-                    r=0;
                 }else {
                     a2.setFechaNacimiento(fNacimientoJDateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                    r=1;
+                    r4=1;
                 } 
             }
+        
+        
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El documento debe ser ingresado sin puntos,espacios,simbolos o letras, intente de nuevo");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "algo salio mal con el boton nueva materia");
         }
-        if (r == 1 &&r2==1) {
+        
+        //VERIFICA SI HAY LUZ VERDE PARA SUBIR EL ALUMNO
+        if (r1 == 1 && r2==1 && r3==1 && r4==1) {
             ControladorAlumno.subirAlumno(a2);
-        } else {
-            JOptionPane.showMessageDialog(this, "No se ha agregado al alumno");
-        }
-        field_apellido.setText("");
-        field_documento.setText("");
-        field_nombre.setText("");
-        estadoJRadioButton.setSelected(false);
-        fNacimientoJDateChooser.setCalendar(null);
-        btn_eliminar.setEnabled(false);
-        btn_guardar.setEnabled(false);
+            field_apellido.setText("");
+            field_documento.setText("");
+            field_nombre.setText("");
+            estadoJRadioButton.setSelected(false);
+            fNacimientoJDateChooser.setCalendar(null);
+            btn_eliminar.setEnabled(false);
+            btn_guardar.setEnabled(false);
 
+        } else {
+            JOptionPane.showMessageDialog(this, "Le ha faltado ingresar algun dato o algun dato es invalido, no se pudo registrar al alumno");
+        }
+        
     }//GEN-LAST:event_btn_nuevoMouseClicked
 
     private void btn_guardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_guardarMouseClicked
@@ -289,21 +318,40 @@ public class Alumno extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "El documento debe ser ingresado sin puntos,espacios,simbolos o letras, intente de nuevo");
 
             }
-            a2.setApellido(field_apellido.getText());
-            a2.setNombre(field_nombre.getText());
-            a2.setDni(Integer.parseInt(field_documento.getText()));
+            //SI NO FALTA NINGUN DATO, TOMARAN VALOR 1 PARA DAR LUZ VERDE
+            int r1 = 0,r2=0;
+            
+            if (field_apellido.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el apellido del alumno");
+            }else {
+                a2.setApellido(field_apellido.getText());
+                r1=1;
+            }
+            
+            if (field_nombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el nombre del alumno");
+            }else {
+                a2.setNombre(field_nombre.getText());
+                r2=1;
+            }
+            
+            a2.setDni(a.getDni());
             a2.setEstado((estadoJRadioButton.isSelected()) ? 1 : 0);
             a2.setIdAlumno(a.getIdAlumno());
             a2.setFechaNacimiento(fNacimientoJDateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            ControladorAlumno.actualizarAlumno(a2);
-            field_apellido.setText("");
-            field_documento.setText("");
-            field_nombre.setText("");
-            estadoJRadioButton.setSelected(false);
-            fNacimientoJDateChooser.setCalendar(null);
-            btn_eliminar.setEnabled(false);
-            btn_guardar.setEnabled(false);
-
+            
+            if(r1==1 && r2==1){
+                ControladorAlumno.actualizarAlumno(a2);
+                field_apellido.setText("");
+                field_documento.setText("");
+                field_nombre.setText("");
+                estadoJRadioButton.setSelected(false);
+                fNacimientoJDateChooser.setCalendar(null);
+                btn_eliminar.setEnabled(false);
+                btn_guardar.setEnabled(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "Le ha faltado ingresar algun dato, no se pudo actualizar al alumno");
+            }
         }
     }//GEN-LAST:event_btn_guardarMouseClicked
 

@@ -267,7 +267,7 @@ public class Materia extends javax.swing.JInternalFrame {
             if(anioJTextField.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Le ha faltado agregar el año a la materia, intentelo de nuevo");
             }            
-        }else{
+        }else if((nombreJTextField.getText()).toLowerCase()!=(ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre()).toLowerCase()){
             JOptionPane.showMessageDialog(this, "Se subira la materia sin codigo, este sera generado automaticamente");
             m.setNombre(nombreJTextField.getText().toLowerCase());
             m.setAnio(Integer.parseInt(anioJTextField.getText()));

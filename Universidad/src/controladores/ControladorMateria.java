@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -159,7 +159,7 @@ public class ControladorMateria {
     /**HECHO POR TAMARA CANTERO */
     public static Materia buscarMateriaPorNombre(String nombre){
         Materia m=new Materia();
-        String sql = "SELECT * FROM materia WHERE nombre=?";
+        String sql = "SELECT * FROM materia WHERE nombre LIKE ?";
         try{
             ps=con.prepareStatement(sql);
             ps.setString(1, nombre.toLowerCase());
