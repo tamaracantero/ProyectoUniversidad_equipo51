@@ -195,7 +195,7 @@ public class Materia extends javax.swing.JInternalFrame {
         }else{
             try{
                 int id=Integer.parseInt(codigoJTextField.getText());
-                modelo.Materia m =ControladorMateria.obtenerMateriaPorId(id);
+                modelo.Materia m =ControladorMateria.obtenerMateriaPorId2(id);
                 if(m.getNombre()==null){
                     botonNuevaMateria.setEnabled(true);
                 }else{
