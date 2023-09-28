@@ -229,7 +229,7 @@ public class Materia extends javax.swing.JInternalFrame {
         }else{estado=0;}
         
         modelo.Materia m=new modelo.Materia(Integer.parseInt(codigoJTextField.getText()),nombreJTextField.getText().toLowerCase(),Integer.parseInt(anioJTextField.getText()),estado);
-        if((nombreJTextField.getText()).toLowerCase()!=(ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre()).toLowerCase()){
+        if((!ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre().toLowerCase().isEmpty())&&(nombreJTextField.getText()).toLowerCase()!=(ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre()).toLowerCase()){
             ControladorMateria.ActualizarMateria(m);
             codigoJTextField.setText("");
         nombreJTextField.setText("");
@@ -271,8 +271,8 @@ public class Materia extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Le ha faltado agregar el nombre a la materia, intentelo de nuevo");
             if(anioJTextField.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Le ha faltado agregar el año a la materia, intentelo de nuevo");
-            }            
-        }else if((nombreJTextField.getText()).toLowerCase()!=(ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre()).toLowerCase()){
+            }
+        }else if((!ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre().toLowerCase().isEmpty())&&(nombreJTextField.getText()).toLowerCase()!=(ControladorMateria.buscarMateriaPorNombre(nombreJTextField.getText().toLowerCase()).getNombre()).toLowerCase()){
             JOptionPane.showMessageDialog(this, "Se subira la materia sin codigo, este sera generado automaticamente");
             m.setNombre(nombreJTextField.getText().toLowerCase());
             m.setAnio(Integer.parseInt(anioJTextField.getText()));
