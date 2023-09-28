@@ -172,18 +172,29 @@ public class CargaNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBox_listaAlumnosItemStateChanged
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
-    int filaSeleccionada = tabla.getSelectedRow();
-      if(filaSeleccionada != -1){
-         ArrayList<Incripcion> listaInscripciones;
-         double nota=0.0;
-         boolean flag=false;
+    int filaSeleccionada = tabla.getSelectedRow(); //trae la fila seleccionada
+      if(filaSeleccionada != -1){  //si hay fila entra
+          
+         ArrayList<Incripcion> listaInscripciones; //crea una lista
+         double nota=0.0; //crea e inicializa nota
+         boolean flag=false; //?
          int idIncripcion = (int) model.getValueAt(filaSeleccionada, 0);
+         
+         
          try{
              nota =Double.parseDouble(model.getValueAt(filaSeleccionada, 2).toString());
-             flag=true;
          }catch(NumberFormatException e){
              JOptionPane.showMessageDialog(this, "ingrese solo numeros, si es decimal separe decimales con un punto");
          }
+         
+          if(nota>= 0 && nota<=10){
+              flag=true;
+             }else{
+             flag=false;
+             JOptionPane.showMessageDialog(rootPane, "El rango de notas posibles en la institución es de 0 a 10");
+             }
+         
+         
          int alumno = ((Alumno) comboBox_listaAlumnos.getSelectedItem()).getIdAlumno();
          
          listaInscripciones = ControladorInscripcion.obtenerIncripciones(alumno);
