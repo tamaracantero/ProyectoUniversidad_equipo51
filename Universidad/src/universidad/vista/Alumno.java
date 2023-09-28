@@ -230,7 +230,7 @@ public class Alumno extends javax.swing.JInternalFrame {
         try {
 
             if (field_apellido.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el apellido del alumno");
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresar el apellido del alumno");
             }else {
                 a2.setApellido(field_apellido.getText());
                 r1=1;
@@ -238,7 +238,7 @@ public class Alumno extends javax.swing.JInternalFrame {
             
 
             if (field_nombre.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el nombre del alumno");
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresar el nombre del alumno");
             }else {
                 a2.setNombre(field_nombre.getText());
                 r2=1;
@@ -284,6 +284,8 @@ public class Alumno extends javax.swing.JInternalFrame {
         
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El documento debe ser ingresado sin puntos,espacios,simbolos o letras, intente de nuevo");
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this, "Le ha faltado seleccionar una fecha");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "algo salio mal con el boton nueva materia");
         }
@@ -300,7 +302,7 @@ public class Alumno extends javax.swing.JInternalFrame {
             btn_guardar.setEnabled(false);
 
         } else {
-            JOptionPane.showMessageDialog(this, "Le ha faltado ingresar algun dato o algun dato es invalido, no se pudo registrar al alumno");
+            JOptionPane.showMessageDialog(this, "Le ha faltado ingresar algun dato, o algun dato es invalido, no se pudo registrar al alumno");
         }
         
     }//GEN-LAST:event_btn_nuevoMouseClicked
@@ -322,14 +324,14 @@ public class Alumno extends javax.swing.JInternalFrame {
             int r1 = 0,r2=0;
             
             if (field_apellido.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el apellido del alumno");
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresar el apellido del alumno");
             }else {
                 a2.setApellido(field_apellido.getText());
                 r1=1;
             }
             
             if (field_nombre.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ha olivdado ingresasr el nombre del alumno");
+                JOptionPane.showMessageDialog(this, "Ha olivdado ingresar el nombre del alumno");
             }else {
                 a2.setNombre(field_nombre.getText());
                 r2=1;
